@@ -1,7 +1,5 @@
 package com.example.andela.fitgoup.activities;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +11,10 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.fragments.FirstFragment;
-import com.example.andela.fitgoup.fragments.FourthFragment;
-import com.example.andela.fitgoup.fragments.SecondFragment;
-import com.example.andela.fitgoup.fragments.ThirdFragment;
+import com.example.andela.fitgoup.fragments.ExerciseFragment;
+import com.example.andela.fitgoup.fragments.StatisticsFragment;
+import com.example.andela.fitgoup.fragments.SettingsFragment;
+import com.example.andela.fitgoup.fragments.CalendarFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +40,10 @@ public class HomeDashboard extends AppCompatActivity {
 
   public void setUpPager(ViewPager viewPager) {
     SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-    adapter.addPageFragment(new FirstFragment(), "Exercise");
-    adapter.addPageFragment(new SecondFragment(), "Settings");
-    adapter.addPageFragment(new ThirdFragment(), "Calendar");
-    adapter.addPageFragment(new FourthFragment(), "Statistics");
+    adapter.addPageFragment(new ExerciseFragment(), "Exercise");
+    adapter.addPageFragment(new SettingsFragment(), "Settings");
+    adapter.addPageFragment(new CalendarFragment(), "Calendar");
+    adapter.addPageFragment(new StatisticsFragment(), "Statistics");
     viewPager.setAdapter(adapter);
   }
 

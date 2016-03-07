@@ -12,10 +12,10 @@ import com.example.andela.fitgoup.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FourthFragment extends Fragment {
+public class StatisticsFragment extends Fragment {
 
 
-  public FourthFragment() {
+  public StatisticsFragment() {
     // Required empty public constructor
   }
 
