@@ -22,7 +22,6 @@ import java.util.List;
 public class HomeDashboard extends AppCompatActivity {
   private ViewPager mViewPager;
 
-
   public HomeDashboard() {}
 
   @Override
