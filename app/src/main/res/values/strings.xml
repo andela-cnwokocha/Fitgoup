@@ -9,4 +9,5 @@
     <string name="fourth_fragment">Fourth Fragment</string>
     <string name="third_fragment">Third Fragment</string>
     <string name="fragment_one">Start</string>
+    <string name="calendar_fragment">Calendar</string>
 </resources>
