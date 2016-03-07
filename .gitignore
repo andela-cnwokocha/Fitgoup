@@ -7,7 +7,6 @@
 /build
 /captures
 .idea/
-app/
 # Built application files
 *.apk
 *.ap_
