@@ -11,9 +11,9 @@ import com.example.andela.fitgoup.R;
 /**
  * Created by andela on 3/6/16.
  */
-public class SecondFragment extends Fragment {
+public class ExerciseFragment extends Fragment {
 
-  public SecondFragment() {}
+  public void FirstFragment() {}
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class SecondFragment extends Fragment {
 
   @Override
   public View onCreateView(LayoutInflater layoutInflater, ViewGroup group, Bundle savedInstance) {
-    return layoutInflater.inflate(R.layout.fragment_two, group, false);
+    return layoutInflater.inflate(R.layout.fragment_home_dashboard, group, false);
   }
+
 }
