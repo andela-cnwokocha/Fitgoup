@@ -12,19 +12,21 @@ import com.example.andela.fitgoup.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CalendarFragment extends Fragment {
+public class InfoFragment extends Fragment {
 
 
-  public CalendarFragment() {
+  public InfoFragment() {
     // Required empty public constructor
   }
-
+  @Override
+  public void onCreate(Bundle savedInstance) {
+    super.onCreate(savedInstance);
+  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_calendar, container, false);
+    return inflater.inflate(R.layout.fragment_third, container, false);
   }
 
 }
