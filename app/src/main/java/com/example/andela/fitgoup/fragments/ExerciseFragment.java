@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.andela.fitgoup.R;
@@ -21,6 +22,7 @@ public class ExerciseFragment extends Fragment {
   private TextView timerview;
   private TextView startbutton;
   private CountDownTimer countDownTimer;
+  private LinearLayout recordLayout;
 
   public ExerciseFragment() {}
 
@@ -39,6 +41,7 @@ public class ExerciseFragment extends Fragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstance) {
     startbutton = (TextView) view.findViewById(R.id.fragment_exercise);
+    recordLayout = (LinearLayout) view.findViewById(R.id.record);
     init();
     timerview = (TextView) view.findViewById(R.id.timer_field);
     timerview.setText("00:00:00");
@@ -48,10 +51,12 @@ public class ExerciseFragment extends Fragment {
         if (startbutton.getText().equals("Start")) {
           countDownTimer.start();
           startbutton.setText("Stop");
+          recordLayout.setVisibility(View.VISIBLE);
         } else {
           countDownTimer.cancel();
           timerview.setText("00:00:00");
           startbutton.setText("Start");
+          recordLayout.setVisibility(View.INVISIBLE);
         }
 
       }
@@ -68,6 +73,7 @@ public class ExerciseFragment extends Fragment {
       public void onFinish() {
         timerview.setText("done!");
         startbutton.setText("Start");
+        recordLayout.setVisibility(View.VISIBLE);
       }
     };
   }
