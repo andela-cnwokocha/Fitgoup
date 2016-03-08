@@ -9,6 +9,15 @@
     tools:context="com.example.andela.fitgoup.activities.HomeDashboard$PlaceholderFragment">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/timer_field"
+        android:paddingBottom="150dp"
+        android:textSize="40sp"
+        android:layout_gravity="center_vertical|center_horizontal"/>
+
+    <TextView
         android:id="@+id/fragment_exercise"
         android:layout_width="wrap_content"
         android:background="@drawable/start_button_states_selector"
@@ -18,6 +27,7 @@
         android:textStyle="bold"
         android:focusable="true"
         android:clickable="true"
+        android:paddingTop="40dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:text="@string/start_button_text"
         android:textColor="@color/icons"
