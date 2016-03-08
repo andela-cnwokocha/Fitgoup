@@ -2,12 +2,14 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragments.InfoFragment">
+             tools:context=".fragments.InfoFragment"
+             android:animateLayoutChanges="true">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/third_fragment"/>
+        android:text="@string/third_fragment"
+        android:animateLayoutChanges="true"/>
 
 </FrameLayout>
