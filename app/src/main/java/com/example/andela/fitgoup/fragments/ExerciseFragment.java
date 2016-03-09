@@ -1,18 +1,27 @@
 package com.example.andela.fitgoup.fragments;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.andela.fitgoup.R;
+import com.example.andela.fitgoup.model.PushUpModel;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by andela on 3/6/16.
@@ -21,6 +30,9 @@ public class ExerciseFragment extends Fragment {
   private TextView timerview;
   private TextView startbutton;
   private CountDownTimer countDownTimer;
+  private LinearLayout recordLayout;
+  private EditText pushups;
+  private Button saveButton;
 
   public ExerciseFragment() {}
 
@@ -39,37 +51,72 @@ public class ExerciseFragment extends Fragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstance) {
     startbutton = (TextView) view.findViewById(R.id.fragment_exercise);
+    recordLayout = (LinearLayout) view.findViewById(R.id.record);
+    pushups = (EditText) view.findViewById(R.id.pushup_num);
+    saveButton = (Button) view.findViewById(R.id.save_button);
     init();
     timerview = (TextView) view.findViewById(R.id.timer_field);
-    timerview.setText("00:00:00");
+    timerview.setText(R.string.init_timer);
     startbutton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         if (startbutton.getText().equals("Start")) {
           countDownTimer.start();
-          startbutton.setText("Stop");
+          startbutton.setText(R.string.stop_timer);
         } else {
           countDownTimer.cancel();
-          timerview.setText("00:00:00");
-          startbutton.setText("Start");
+          timerview.setText(R.string.init_timer);
+          startbutton.setText(R.string.start_timer);
+          recordLayout.setVisibility(View.INVISIBLE);
         }
 
       }
     });
+    saveButton();
   }
 
   private void init() {
-    countDownTimer = new CountDownTimer(60 * 5 * 1000, 1000) {
+    countDownTimer = new CountDownTimer(60 * 1 * 500, 500) {
       public void onTick(long millisUntilFinished) {
-        long seconds = millisUntilFinished/1000;
+        long seconds = millisUntilFinished/2000;
         timerview.setText(String.format("%02d:%02d:%02d", (seconds / 3600),
             (seconds % 3600) / 60, (seconds % 60)));
       }
       public void onFinish() {
         timerview.setText("done!");
-        startbutton.setText("Start");
+        startbutton.setText(R.string.restart_button);
+        recordLayout.setVisibility(View.VISIBLE);
       }
     };
+  }
+
+  private int processedpushup() {
+    return Integer.parseInt(pushups.getText().toString().trim());
+  }
+
+  private void savePushups() {
+    PushUpModel pushUpModel = new PushUpModel();
+    pushUpModel.pushups = processedpushup();
+    pushUpModel.save();
+  }
+
+  private void saveButton() {
+    saveButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        int values = pushups.getText().toString().trim().length();
+        if (values > 0) {
+          savePushups();
+          pushups.setEnabled(false);
+          saveButton.setClickable(false);
+          //testing size
+          List<PushUpModel> pushfits = PushUpModel.fetchPushups();
+          Log.i("pushfitsSize", String.valueOf(pushfits.size()));
+        } else {
+          pushups.setError("No Pushups entered");
+        }
+      }
+    });
   }
 
 }
