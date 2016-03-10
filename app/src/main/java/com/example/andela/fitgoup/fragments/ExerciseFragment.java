@@ -1,26 +1,25 @@
 package com.example.andela.fitgoup.fragments;
 
-import android.database.Cursor;
+
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.model.PushUpModel;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -86,6 +85,14 @@ public class ExerciseFragment extends Fragment {
         timerview.setText("done!");
         startbutton.setText(R.string.restart_button);
         recordLayout.setVisibility(View.VISIBLE);
+        try {
+          Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+          Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+          doneSound.play();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+
       }
     };
   }
