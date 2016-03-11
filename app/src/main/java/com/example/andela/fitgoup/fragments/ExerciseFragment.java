@@ -1,11 +1,13 @@
 package com.example.andela.fitgoup.fragments;
 
 
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,13 +35,12 @@ public class ExerciseFragment extends Fragment {
   private EditText pushups;
   private Button saveButton;
 
+
   public ExerciseFragment() {}
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
-
     super.onCreate(savedInstanceState);
-
   }
 
   @Override

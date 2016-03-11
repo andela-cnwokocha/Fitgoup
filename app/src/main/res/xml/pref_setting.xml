@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:launcher="http://schemas.android.com/tools">
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="Select Pushups option"
+        android:summary="How would you like to countdown">
+        <SwitchPreferenceCompat
+            android:key="timer_switch"
+            android:title="Countdown Timer"
+            android:summary="Countdown with timer clock"
+            android:defaultValue="false"/>
+        <EditTextPreference
+            android:key="timer_count"
+            android:dependency="timer_switch"
+            android:numeric="integer"
+            android:inputType="number"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="Minutes"
+            android:summary="Rate number of minutes to pushup"
+            android:defaultValue="5"
+            android:dialogTitle="Enter the number of minutes you will do pushups" />
+        <SwitchPreferenceCompat
+            android:key="pushup_switch"
+            android:title="Push-ups Countdown"
+            android:summary="Countdown to the number of pushup"
+            android:defaultValue="false"/>
+        <EditTextPreference
+            android:key="pushup_count"
+            android:dependency="pushup_switch"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="Enter minimum number of pushups"
+            android:summary="The minimum number of pushup to perform"
+            android:inputType="number"
+            android:defaultValue="10"
+            android:dialogTitle="Minimum number of Push-ups"/>
+
+    </android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>
