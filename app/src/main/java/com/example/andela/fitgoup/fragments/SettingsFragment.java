@@ -25,6 +25,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(listener);
   }
 
   @Override
@@ -43,11 +44,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
           countdown.setSummary(String.valueOf(sharedPreferences.getBoolean("pushup_switch", false)));
           findPreference("timer_count").setSummary(sharedPreferences.getString("timer_count", "5"));
 
-        } else if (key.equals("pushup_switch") && countdown.isChecked()) {
+        } else if ((key.equals("pushup_switch") || key.equals("pushup_count")) && countdown.isChecked()) {
           timer.setChecked(false);
-          Log.i("switches", "" + timer.isChecked());
-          timer.setSummary(String.valueOf(sharedPreferences.getBoolean("timer_switch", false)));
           countdown.setSummary(String.valueOf(sharedPreferences.getBoolean("pushup_switch", false)));
+          timer.setSummary(String.valueOf(sharedPreferences.getBoolean("timer_switch", false)));
           findPreference("pushup_count").setSummary(String.valueOf(sharedPreferences.getString("pushup_count", "10")));
         }
       }
@@ -59,11 +59,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
   public void onResume() {
     super.onResume();
     getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(listener);
+    findPreference("timer_count").setSummary(sharedPreferences.getString("timer_count", "5"));
+    findPreference("pushup_count").setSummary(String.valueOf(sharedPreferences.getString("pushup_count", "10")));
   }
 
   @Override
   public void onPause() {
     super.onPause();
     getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(listener);
+    findPreference("timer_count").setSummary(sharedPreferences.getString("timer_count", "5"));
+    findPreference("pushup_count").setSummary(String.valueOf(sharedPreferences.getString("pushup_count", "10")));
   }
+
 }

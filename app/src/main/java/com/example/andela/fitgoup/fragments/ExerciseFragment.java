@@ -34,7 +34,12 @@ public class ExerciseFragment extends Fragment {
   private LinearLayout recordLayout;
   private EditText pushups;
   private Button saveButton;
-
+  private int timerCount;
+  private boolean timeroption;
+  private int countDownCount;
+  private boolean countdownoption;
+  private SharedPreferences preferences;
+  private int value;
 
   public ExerciseFragment() {}
 
@@ -54,13 +59,13 @@ public class ExerciseFragment extends Fragment {
     recordLayout = (LinearLayout) view.findViewById(R.id.record);
     pushups = (EditText) view.findViewById(R.id.pushup_num);
     saveButton = (Button) view.findViewById(R.id.save_button);
-    init();
     timerview = (TextView) view.findViewById(R.id.timer_field);
-    timerview.setText(R.string.init_timer);
+    setCountOptions();
     startbutton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         if (startbutton.getText().equals("Start")) {
+          init();
           countDownTimer.start();
           startbutton.setText(R.string.stop_timer);
         } else {
@@ -69,18 +74,16 @@ public class ExerciseFragment extends Fragment {
           startbutton.setText(R.string.start_timer);
           recordLayout.setVisibility(View.INVISIBLE);
         }
-
       }
     });
     saveButton();
   }
 
   private void init() {
-    countDownTimer = new CountDownTimer(60 * 1 * 500, 500) {
+    setCountOptions();
+    countDownTimer = new CountDownTimer(value * 60000, 1000) {
       public void onTick(long millisUntilFinished) {
-        long seconds = millisUntilFinished/2000;
-        timerview.setText(String.format("%02d:%02d:%02d", (seconds / 3600),
-            (seconds % 3600) / 60, (seconds % 60)));
+        setViews(millisUntilFinished/1000, millisUntilFinished/60000);
       }
       public void onFinish() {
         timerview.setText("done!");
@@ -93,7 +96,6 @@ public class ExerciseFragment extends Fragment {
         } catch (Exception e) {
           e.printStackTrace();
         }
-
       }
     };
   }
@@ -117,14 +119,29 @@ public class ExerciseFragment extends Fragment {
           savePushups();
           pushups.setEnabled(false);
           saveButton.setClickable(false);
-          //testing size
-          List<PushUpModel> pushfits = PushUpModel.fetchPushups();
-          Log.i("pushfitsSize", String.valueOf(pushfits.size()));
         } else {
           pushups.setError("No Pushups entered");
         }
       }
     });
+  }
+
+  private void setCountOptions() {
+    preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    timeroption = preferences.getBoolean("timer_switch", false);
+    countdownoption = preferences.getBoolean("pushup_switch", false);
+    timerCount = Integer.parseInt(preferences.getString("timer_count", "5"));
+    countDownCount = Integer.parseInt(preferences.getString("pushup_count", "10"));
+    value = timeroption?timerCount:countDownCount;
+  }
+
+  private void setViews(long secsval, long countvalue) {
+    if (timeroption) {
+      timerview.setText(String.format("%02d:%02d:%02d", (secsval / 3600),
+          (secsval % 3600) / 60, (secsval % 60)));
+    } else if (countdownoption) {
+      timerview.setText(String.format("%s", countvalue - 1));
+    }
   }
 
 }
