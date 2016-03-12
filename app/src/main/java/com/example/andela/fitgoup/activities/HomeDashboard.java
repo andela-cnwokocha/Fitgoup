@@ -1,7 +1,6 @@
 package com.example.andela.fitgoup.activities;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceFragment;
+
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +46,7 @@ public class HomeDashboard extends AppCompatActivity {
     tabs.setupWithViewPager(mViewPager);
     setTabIcons();
 
+    //PreferenceManager.setDefaultValues(this, R.xml.pref_setting, false);
   }
 
   public void setTabIcons() {
@@ -99,4 +99,6 @@ public class HomeDashboard extends AppCompatActivity {
       titles.add(fragmentTitle);
     }
   }
+
+
 }

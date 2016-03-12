@@ -15,8 +15,6 @@
         <EditTextPreference
             android:key="timer_count"
             android:dependency="timer_switch"
-            android:numeric="integer"
-            android:inputType="number"
             android:layout="?android:attr/preferenceLayoutChild"
             android:title="Minutes"
             android:summary="Rate number of minutes to pushup"
