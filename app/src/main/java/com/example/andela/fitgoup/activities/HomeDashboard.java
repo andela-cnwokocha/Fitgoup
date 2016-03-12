@@ -105,4 +105,5 @@ public class HomeDashboard extends AppCompatActivity {
       titles.add(fragmentTitle);
     }
   }
+
 }

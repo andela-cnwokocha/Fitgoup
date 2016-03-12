@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.andela.fitgoup.R;
+import com.example.andela.fitgoup.activities.HomeDashboard;
 import com.example.andela.fitgoup.model.PushUpModel;
 
 import java.util.List;
@@ -38,16 +40,17 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   private LinearLayout recordLayout;
   private EditText pushups;
   private Button saveButton;
-  private int timerCount;
+  private long timerCount;
   private boolean timeroption;
-  private int countDownCount;
+  private long countDownCount;
+  private long counter = 0;
   private boolean countdownoption;
   private SharedPreferences preferences;
-  private int value;
   private SensorManager mSensorManager;
   private Sensor mSensor;
 
-  public ExerciseFragment() {}
+  public ExerciseFragment() {
+  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -69,15 +72,25 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     mSensorManager = (SensorManager) getActivity().getSystemService(getActivity().SENSOR_SERVICE);
     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
     setCountOptions();
+    saveButton();
     startbutton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        setCountOptions();
         if (startbutton.getText().equals("Start")) {
-          init();
-          countDownTimer.start();
-          startbutton.setText(R.string.stop_timer);
+          if (timeroption) {
+            initTimeCounter();
+            countDownTimer.start();
+            startbutton.setText(R.string.stop_timer);
+          } else if (countdownoption) {
+            mSensorManager.registerListener(ExerciseFragment.this, mSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
+          }
         } else {
-          countDownTimer.cancel();
+          Log.e("myError", "" + (countDownTimer == null));
+          if (countDownTimer != null) {
+            countDownTimer.cancel();
+          }
           mSensorManager.unregisterListener(ExerciseFragment.this);
           timerview.setText(R.string.init_timer);
           startbutton.setText(R.string.start_timer);
@@ -85,14 +98,12 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
         }
       }
     });
-    saveButton();
   }
 
-  private void init() {
-    setCountOptions();
-    countDownTimer = new CountDownTimer(value * 60000, 1000) {
+  private void initTimeCounter() {
+    countDownTimer = new CountDownTimer(timerCount * 60000, 1000) {
       public void onTick(long millisUntilFinished) {
-        setViews(millisUntilFinished/1000, millisUntilFinished/60000);
+        setCounterView(millisUntilFinished/1000);
       }
       public void onFinish() {
         timerview.setText("done!");
@@ -109,14 +120,18 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     };
   }
 
-  private int processedpushup() {
-    return Integer.parseInt(pushups.getText().toString().trim());
+  private void setCounterView(long secsval) {
+    timerview.setText(String.format("%02d:%02d:%02d", (secsval / 3600),
+        (secsval % 3600) / 60, (secsval % 60)));
   }
 
-  private void savePushups() {
-    PushUpModel pushUpModel = new PushUpModel();
-    pushUpModel.pushups = processedpushup();
-    pushUpModel.save();
+  private void setCountOptions() {
+    preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+    timeroption = preferences.getBoolean("timer_switch", false);
+    countdownoption = preferences.getBoolean("pushup_switch", false);
+    timerCount = Integer.parseInt(preferences.getString("timer_count", "5"));
+    countDownCount = Integer.parseInt(preferences.getString("pushup_count", "10"));
+
   }
 
   private void saveButton() {
@@ -125,7 +140,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
       public void onClick(View v) {
         int values = pushups.getText().toString().trim().length();
         if (values > 0) {
-          savePushups();
+          savePushups(processedpushup());
           pushups.setEnabled(false);
           saveButton.setClickable(false);
         } else {
@@ -135,37 +150,40 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     });
   }
 
-  private void setCountOptions() {
-    preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-    timeroption = preferences.getBoolean("timer_switch", false);
-    countdownoption = preferences.getBoolean("pushup_switch", false);
-    timerCount = Integer.parseInt(preferences.getString("timer_count", "5"));
-    countDownCount = Integer.parseInt(preferences.getString("pushup_count", "10"));
-    value = timeroption?timerCount:countDownCount;
+  private void savePushups(long pushup) {
+    PushUpModel pushUpModel = new PushUpModel();
+    pushUpModel.pushups = pushup;
+    pushUpModel.save();
   }
 
-  private void setViews(long secsval, long countvalue) {
-    if (timeroption) {
-      timerview.setText(String.format("%02d:%02d:%02d", (secsval / 3600),
-          (secsval % 3600) / 60, (secsval % 60)));
-    } else if (countdownoption) {
-      mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
-      timerview.setText(String.format("%s", countvalue - 1));
-    }
+  private long processedpushup() {
+    return Integer.parseInt(pushups.getText().toString().trim());
   }
+
 
   @Override
   public void onSensorChanged(SensorEvent event) {
     if (event.values[0] == 0) {
-      Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-      Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
-      doneSound.play();
+      timerview.setText(String.format("%s", counter += 1));
+      if (counter == countDownCount) {
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+        doneSound.play();
+      }
+
+     /* if (startbutton.getText().equals()) {
+        //timerview.setText(String.format("You recorded %s Push-ups!", counter));
+        Log.e("myErrorr", "Would save now");
+        //savePushups(counter);
+        //counter = 0;
+      }*/
     }
+    startbutton.setText(R.string.stop_timer);
   }
 
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    Log.d("MY_APP", sensor.toString() + " - " + accuracy);
+
   }
 
   @Override
@@ -179,10 +197,22 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     super.onPause();
     mSensorManager.unregisterListener(this);
   }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-    mSensorManager.unregisterListener(this);
-  }
 }
+
+  /*
+  @Override
+  public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    Log.d("MY_APP", sensor.toString() + " - " + accuracy);
+  }
+
+  *//*@Override
+  public void setUserVisibleHint(boolean isVisibleToUser) {
+    super.setUserVisibleHint(isVisibleToUser);
+    if (this.isVisible()) {
+      if (!isVisibleToUser && mSensorManager != null) {
+        mSensorManager.unregisterListener(this);
+      }
+    }
+  }*//*
+}*/
+
