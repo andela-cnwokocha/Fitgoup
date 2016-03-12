@@ -2,6 +2,10 @@ package com.example.andela.fitgoup.fragments;
 
 
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -27,7 +31,7 @@ import java.util.List;
 /**
  * Created by andela on 3/6/16.
  */
-public class ExerciseFragment extends Fragment {
+public class ExerciseFragment extends Fragment implements SensorEventListener {
   private TextView timerview;
   private TextView startbutton;
   private CountDownTimer countDownTimer;
@@ -40,6 +44,8 @@ public class ExerciseFragment extends Fragment {
   private boolean countdownoption;
   private SharedPreferences preferences;
   private int value;
+  private SensorManager mSensorManager;
+  private Sensor mSensor;
 
   public ExerciseFragment() {}
 
@@ -60,6 +66,8 @@ public class ExerciseFragment extends Fragment {
     pushups = (EditText) view.findViewById(R.id.pushup_num);
     saveButton = (Button) view.findViewById(R.id.save_button);
     timerview = (TextView) view.findViewById(R.id.timer_field);
+    mSensorManager = (SensorManager) getActivity().getSystemService(getActivity().SENSOR_SERVICE);
+    mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
     setCountOptions();
     startbutton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -70,6 +78,7 @@ public class ExerciseFragment extends Fragment {
           startbutton.setText(R.string.stop_timer);
         } else {
           countDownTimer.cancel();
+          mSensorManager.unregisterListener(ExerciseFragment.this);
           timerview.setText(R.string.init_timer);
           startbutton.setText(R.string.start_timer);
           recordLayout.setVisibility(View.INVISIBLE);
@@ -140,8 +149,40 @@ public class ExerciseFragment extends Fragment {
       timerview.setText(String.format("%02d:%02d:%02d", (secsval / 3600),
           (secsval % 3600) / 60, (secsval % 60)));
     } else if (countdownoption) {
+      mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
       timerview.setText(String.format("%s", countvalue - 1));
     }
   }
 
+  @Override
+  public void onSensorChanged(SensorEvent event) {
+    if (event.values[0] == 0) {
+      Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+      Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+      doneSound.play();
+    }
+  }
+
+  @Override
+  public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    Log.d("MY_APP", sensor.toString() + " - " + accuracy);
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mSensorManager.unregisterListener(this);
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    mSensorManager.unregisterListener(this);
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    mSensorManager.unregisterListener(this);
+  }
 }
