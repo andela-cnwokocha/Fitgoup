@@ -9,14 +9,11 @@ import android.view.ViewGroup;
 
 import com.example.andela.fitgoup.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StatisticsFragment extends Fragment {
 
 
   public StatisticsFragment() {
-    // Required empty public constructor
+
   }
 
 

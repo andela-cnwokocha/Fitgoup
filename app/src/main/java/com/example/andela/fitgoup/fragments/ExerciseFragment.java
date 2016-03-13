@@ -161,6 +161,11 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     PushUpModel pushUpModel = new PushUpModel();
     pushUpModel.pushups = pushup;
     pushUpModel.save();
+
+    List<PushUpModel> pushupz = PushUpModel.fetchPushups();
+    for(PushUpModel pushed:pushupz) {
+      Log.i("Sissed", "ID: "+pushed.getId()+" Count: "+pushed.pushups);
+    }
   }
 
   private long processedpushup() {
