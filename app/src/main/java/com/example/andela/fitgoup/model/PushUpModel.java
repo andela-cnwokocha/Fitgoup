@@ -19,7 +19,7 @@ import java.util.List;
 public class PushUpModel extends Model {
 
   @Column(name = "day_pushup")
-  public int pushups;
+  public long pushups;
 
   public PushUpModel () {
     super();

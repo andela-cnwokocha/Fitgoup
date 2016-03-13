@@ -1,6 +1,13 @@
 package com.example.andela.fitgoup.activities;
 
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -45,8 +52,6 @@ public class HomeDashboard extends AppCompatActivity {
     tabs = (TabLayout) findViewById(R.id.tabs);
     tabs.setupWithViewPager(mViewPager);
     setTabIcons();
-
-    //PreferenceManager.setDefaultValues(this, R.xml.pref_setting, false);
   }
 
   public void setTabIcons() {
@@ -70,6 +75,7 @@ public class HomeDashboard extends AppCompatActivity {
     adapter.addPageFragment(new CalendarFragment(), "Calendar");
     viewPager.setAdapter(adapter);
   }
+
 
   public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> pages = new ArrayList<>();
@@ -99,6 +105,5 @@ public class HomeDashboard extends AppCompatActivity {
       titles.add(fragmentTitle);
     }
   }
-
 
 }
