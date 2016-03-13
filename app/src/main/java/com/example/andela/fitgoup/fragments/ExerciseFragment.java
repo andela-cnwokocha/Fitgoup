@@ -23,6 +23,7 @@ import android.widget.EditText;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.activities.HomeDashboard;
@@ -85,9 +86,11 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
           } else if (countdownoption) {
             mSensorManager.registerListener(ExerciseFragment.this, mSensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
+            if (countDownCount == counter) {
+              timerview.setText(String.format("You recorded %s Push-ups!", counter));
+            }
           }
         } else {
-          Log.e("myError", "" + (countDownTimer == null));
           if (countDownTimer != null) {
             countDownTimer.cancel();
           }
@@ -108,6 +111,9 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
       public void onFinish() {
         timerview.setText("done!");
         startbutton.setText(R.string.restart_button);
+        pushups.setVisibility(View.VISIBLE);
+        saveButton.setText("Save Record");
+        saveButton.setClickable(true);
         recordLayout.setVisibility(View.VISIBLE);
         try {
           Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -139,9 +145,10 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
       @Override
       public void onClick(View v) {
         int values = pushups.getText().toString().trim().length();
-        if (values > 0) {
+        if ((values > 0) && startbutton.getText().equals("Restart")) {
           savePushups(processedpushup());
-          pushups.setEnabled(false);
+          pushups.setVisibility(View.GONE);
+          saveButton.setText("Saved");
           saveButton.setClickable(false);
         } else {
           pushups.setError("No Pushups entered");
@@ -151,9 +158,10 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   }
 
   private void savePushups(long pushup) {
-    PushUpModel pushUpModel = new PushUpModel();
-    pushUpModel.pushups = pushup;
-    pushUpModel.save();
+    //PushUpModel pushUpModel = new PushUpModel();
+    //pushUpModel.pushups = pushup;
+    //pushUpModel.save();
+    Log.e("myErro_data", "DataSize:"+PushUpModel.fetchPushups().size());
   }
 
   private long processedpushup() {
@@ -163,22 +171,20 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
 
   @Override
   public void onSensorChanged(SensorEvent event) {
+    startbutton.setText(R.string.stop_timer);
     if (event.values[0] == 0) {
       timerview.setText(String.format("%s", counter += 1));
       if (counter == countDownCount) {
+        mSensorManager.unregisterListener(this);
+        startbutton.setText(R.string.restart_button);
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
         doneSound.play();
+        savePushups(counter);
+        timerview.setText(String.format("You recorded %s Push-ups!", counter));
+        counter = 0;
       }
-
-     /* if (startbutton.getText().equals()) {
-        //timerview.setText(String.format("You recorded %s Push-ups!", counter));
-        Log.e("myErrorr", "Would save now");
-        //savePushups(counter);
-        //counter = 0;
-      }*/
     }
-    startbutton.setText(R.string.stop_timer);
   }
 
   @Override
@@ -198,21 +204,4 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     mSensorManager.unregisterListener(this);
   }
 }
-
-  /*
-  @Override
-  public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    Log.d("MY_APP", sensor.toString() + " - " + accuracy);
-  }
-
-  *//*@Override
-  public void setUserVisibleHint(boolean isVisibleToUser) {
-    super.setUserVisibleHint(isVisibleToUser);
-    if (this.isVisible()) {
-      if (!isVisibleToUser && mSensorManager != null) {
-        mSensorManager.unregisterListener(this);
-      }
-    }
-  }*//*
-}*/
 
