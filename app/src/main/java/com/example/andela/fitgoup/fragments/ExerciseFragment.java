@@ -158,10 +158,9 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   }
 
   private void savePushups(long pushup) {
-    //PushUpModel pushUpModel = new PushUpModel();
-    //pushUpModel.pushups = pushup;
-    //pushUpModel.save();
-    Log.e("myErro_data", "DataSize:"+PushUpModel.fetchPushups().size());
+    PushUpModel pushUpModel = new PushUpModel();
+    pushUpModel.pushups = pushup;
+    pushUpModel.save();
   }
 
   private long processedpushup() {
