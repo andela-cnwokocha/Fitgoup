@@ -42,22 +42,16 @@ public class StatisticsFragment extends Fragment {
 
     List<PushUpModel> pushuprecordMain = PushUpModel.fetchPushups();
     List<PushUpModel> pushuprecords = new ArrayList<>();
-    PushUpModel pushes1 = new PushUpModel(pushuprecordMain.get(0).pushups, pushuprecordMain.get(0).currentDay);
-    PushUpModel pushes2 = new PushUpModel(14, "Mar 16, 2016");
-    PushUpModel pushes3 = new PushUpModel(12, "Mar 17, 2016");
-    PushUpModel pushes4 = new PushUpModel(18, "Mar 18, 2016");
-    PushUpModel pushes5 = new PushUpModel(40, "Mar 19, 2016");
-    PushUpModel pushes6 = new PushUpModel(14, "Mar 20, 2016");
-    PushUpModel pushes7 = new PushUpModel(16, "Mar 21, 2016");
-    pushuprecords.add(pushes1);
-    pushuprecords.add(pushes2);
-    pushuprecords.add(pushes3);
-    pushuprecords.add(pushes4);
-    pushuprecords.add(pushes5);
-    pushuprecords.add(pushes6);
-    pushuprecords.add(pushes7);
-    if(pushuprecords.size() > 0) {
-      for (PushUpModel pushUpModel: pushuprecords) {
+    ArrayList<String> days = new ArrayList<>();
+    if(pushuprecordMain.size() > 0) {
+      //Select sections -> pushuprecords = pushuprecords.subList(0,5);
+
+      // Get all recorded days
+      for (PushUpModel record: pushuprecordMain) {
+        days.add(record.currentDay);
+      }
+      Log.i("puz", ""+pushuprecordMain.size());
+      for (PushUpModel pushUpModel: pushuprecordMain) {
         series.addPoint(new ValueLinePoint(pushUpModel.currentDay, (float)pushUpModel.pushups));
       }
     } else {

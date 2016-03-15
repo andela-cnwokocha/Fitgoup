@@ -1,6 +1,7 @@
 package com.example.andela.fitgoup.model;
 
 import android.database.Cursor;
+import android.util.Log;
 
 import com.activeandroid.Cache;
 import com.activeandroid.Model;
