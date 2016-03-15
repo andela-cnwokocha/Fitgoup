@@ -5,11 +5,21 @@
              tools:context=".fragments.StatisticsFragment"
              android:animateLayoutChanges="true">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <org.eazegraph.lib.charts.ValueLineChart
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cubiclinechart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/fourth_fragment"
-        android:animateLayoutChanges="true"/>
+        android:paddingBottom="50dp"
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:egUseCubic="true"
+        app:egUseOverlapFill="true"
+        app:egCurveSmoothness="0.4"
+        app:egIndicatorLineColor="@color/colorAccent"
+        app:egLegendHeight="40dp"
+        app:egShowStandardValue="true"
+        app:egLegendColor="@color/colorPrimaryText"/>
 
 </FrameLayout>

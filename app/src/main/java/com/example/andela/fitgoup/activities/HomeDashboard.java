@@ -54,7 +54,6 @@ public class HomeDashboard extends AppCompatActivity {
     tabs = (TabLayout) findViewById(R.id.tabs);
     tabs.setupWithViewPager(mViewPager);
     setTabIcons();
-    PushUpModel.clearData();
   }
 
   public void setTabIcons() {
