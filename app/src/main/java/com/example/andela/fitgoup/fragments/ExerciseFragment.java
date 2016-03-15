@@ -29,7 +29,10 @@ import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.activities.HomeDashboard;
 import com.example.andela.fitgoup.model.PushUpModel;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by andela on 3/6/16.
@@ -158,9 +161,32 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   }
 
   private void savePushups(long pushup) {
-    PushUpModel pushUpModel = new PushUpModel();
-    pushUpModel.pushups = pushup;
-    pushUpModel.save();
+    List<PushUpModel> push = PushUpModel.fetchPushups();
+    Log.i("PUSHZiii", "INIT Size: "+PushUpModel.fetchPushups().size());
+    boolean dateExists = false;
+    if (push.size() > 0) {
+      for (PushUpModel pushUpModel : push) {
+        if (pushUpModel.currentDay.equals(getLogTime())) {
+          dateExists = true;
+          PushUpModel savedPushup = PushUpModel.load(PushUpModel.class, pushUpModel.getId());
+          savedPushup.pushups+=pushup;
+          savedPushup.save();
+        }
+      }
+      if (!dateExists) {// Not tested yet until tomorrow
+        PushUpModel pushUpModel = new PushUpModel(pushup, getLogTime());
+        pushUpModel.save();
+      }
+    } else {
+      PushUpModel pushUpModel = new PushUpModel(pushup, getLogTime());
+      pushUpModel.save();
+    }
+    Log.i("PUSHZiii", "END Size: "+PushUpModel.fetchPushups().size());
+    List<PushUpModel> newpush = PushUpModel.fetchPushups(); {
+      for (PushUpModel p: newpush) {
+        Log.i("PUSHZiii", "ID: "+p.getId()+" DATE: "+p.currentDay+" VAL: "+p.pushups);
+      }
+    }
   }
 
   private long processedpushup() {
@@ -202,5 +228,12 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     super.onPause();
     mSensorManager.unregisterListener(this);
   }
+
+  private String getLogTime() {
+    Date currentTime = new Date();
+    Locale myLocale = new Locale("en");
+    return DateFormat.getDateInstance(DateFormat.DEFAULT, myLocale).format(currentTime);
+  }
+
 }
 

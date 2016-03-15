@@ -12,14 +12,15 @@
 
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="RestClient.db"/>
+            android:value="Pushup.db"/>
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1" />
+            android:value="4" />
 
         <activity
             android:name=".activities.HomeDashboard"
             android:label="@string/title_activity_home_dashboard"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

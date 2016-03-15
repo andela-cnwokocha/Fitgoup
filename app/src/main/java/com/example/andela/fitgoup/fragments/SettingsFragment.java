@@ -2,15 +2,11 @@ package com.example.andela.fitgoup.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.text.InputType;
-import android.util.Log;
 
 import com.example.andela.fitgoup.R;
-
 /**
  * Created by andela on 3/6/16.
  */
