@@ -5,9 +5,27 @@
              tools:context=".fragments.StatisticsFragment"
              android:animateLayoutChanges="true">
 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/noNoteLayout"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/noNote_text"
+            android:textSize="20sp"
+            android:paddingBottom="30dp"
+            android:text="@string/no_data"/>
+    </LinearLayout>
+
     <org.eazegraph.lib.charts.ValueLineChart
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cubiclinechart"
+        android:id="@+id/linechart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="50dp"
@@ -20,6 +38,7 @@
         app:egIndicatorLineColor="@color/colorAccent"
         app:egLegendHeight="40dp"
         app:egShowStandardValue="true"
-        app:egLegendColor="@color/colorPrimaryText"/>
+        app:egLegendColor="@color/colorPrimaryText"
+        app:egEmptyDataText="Push Ups"/>
 
 </FrameLayout>
