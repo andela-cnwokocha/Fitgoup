@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.fragments.CalendarFragment;
@@ -25,6 +26,7 @@ import com.example.andela.fitgoup.fragments.ExerciseFragment;
 import com.example.andela.fitgoup.fragments.StatisticsFragment;
 import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.InfoFragment;
+import com.example.andela.fitgoup.model.PushUpModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,7 @@ public class HomeDashboard extends AppCompatActivity {
     tabs = (TabLayout) findViewById(R.id.tabs);
     tabs.setupWithViewPager(mViewPager);
     setTabIcons();
+    PushUpModel.clearData();
   }
 
   public void setTabIcons() {
