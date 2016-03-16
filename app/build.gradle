@@ -35,4 +35,5 @@ dependencies {
     compile 'com.android.support:preference-v7:23.2.0'
     compile 'com.github.blackfizz:eazegraph:1.2.2@aar'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.beardedhen:androidbootstrap:2.1.0'
 }
