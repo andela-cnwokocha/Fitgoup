@@ -20,6 +20,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.fragments.CalendarFragment;
 import com.example.andela.fitgoup.fragments.ExerciseFragment;
@@ -54,6 +55,11 @@ public class HomeDashboard extends AppCompatActivity {
     tabs = (TabLayout) findViewById(R.id.tabs);
     tabs.setupWithViewPager(mViewPager);
     setTabIcons();
+
+    TypefaceProvider.registerDefaultIconSets();
+    /*PushUpModel pushUpModel = new PushUpModel(14, "Mar 1, 2016");
+    pushUpModel.save();
+    PushUpModel.clearData();*/
   }
 
   public void setTabIcons() {

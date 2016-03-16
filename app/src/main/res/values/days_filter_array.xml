@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="days_filter_array">
+        <item>5 Days</item>
+        <item>7 Days </item>
+        <item>14 Days</item>
+        <item>21 Days</item>
+        <item>30 Days</item>
+    </string-array>
+</resources>
