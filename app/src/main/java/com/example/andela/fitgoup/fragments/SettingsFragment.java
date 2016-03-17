@@ -3,7 +3,7 @@ package com.example.andela.fitgoup.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceFragmentCompat;
+import me.philio.preferencecompatextended.PreferenceFragmentCompat;
 import android.support.v7.preference.SwitchPreferenceCompat;
 
 import com.example.andela.fitgoup.R;
@@ -17,13 +17,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
   private SharedPreferences.OnSharedPreferenceChangeListener listener;
   private SharedPreferences sharedPreferences;
 
-
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(listener);
-  }
-
   @Override
   public void onCreatePreferences(Bundle bundle, String s) {
     addPreferencesFromResource(R.xml.pref_setting);
@@ -34,17 +27,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
       public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         timer = (SwitchPreferenceCompat) findPreference("timer_switch");
         countdown = (SwitchPreferenceCompat) findPreference("pushup_switch");
-        if((key.equals("timer_switch") || key.equals("timer_count")) && timer.isChecked()) {
+        if((key.equals("timer_switch")) && timer.isChecked()) {
           countdown.setChecked(false);
           timer.setSummary(String.valueOf(sharedPreferences.getBoolean("timer_switch", false)));
           countdown.setSummary(String.valueOf(sharedPreferences.getBoolean("pushup_switch", false)));
-          findPreference("timer_count").setSummary(sharedPreferences.getString("timer_count", "5"));
-
-        } else if ((key.equals("pushup_switch") || key.equals("pushup_count")) && countdown.isChecked()) {
+        } else if (key.equals("pushup_switch") && countdown.isChecked()) {
           timer.setChecked(false);
           countdown.setSummary(String.valueOf(sharedPreferences.getBoolean("pushup_switch", false)));
           timer.setSummary(String.valueOf(sharedPreferences.getBoolean("timer_switch", false)));
-          findPreference("pushup_count").setSummary(String.valueOf(sharedPreferences.getString("pushup_count", "10")));
         }
       }
     };
@@ -55,16 +45,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
   public void onResume() {
     super.onResume();
     getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(listener);
-    findPreference("timer_count").setSummary(sharedPreferences.getString("timer_count", "5"));
-    findPreference("pushup_count").setSummary(String.valueOf(sharedPreferences.getString("pushup_count", "10")));
   }
 
   @Override
   public void onPause() {
     super.onPause();
     getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(listener);
-    findPreference("timer_count").setSummary(sharedPreferences.getString("timer_count", "5"));
-    findPreference("pushup_count").setSummary(String.valueOf(sharedPreferences.getString("pushup_count", "10")));
   }
 
 }
