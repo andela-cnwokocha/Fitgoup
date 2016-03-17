@@ -24,8 +24,6 @@ import java.util.List;
 
 public class StatisticsFragment extends Fragment {
   private List<PushUpModel> pushuprecordMain;
-  private List<PushUpModel> pushuprecordsSubset = new ArrayList<>();
-  //private ValueLineSeries series;
   private View viewing;
   private int recordsSize;
   private LineChart lineChart;
@@ -49,6 +47,7 @@ public class StatisticsFragment extends Fragment {
     pushuprecordMain = PushUpModel.fetchPushups();
 
     dateSelector(5, spinnerDropdown);
+
     spinnerDropdown.setOnDropDownItemClickListener(new BootstrapDropDown.OnDropDownItemClickListener() {
       @Override
       public void onItemClick(ViewGroup parent, View v, int id) {
@@ -69,8 +68,6 @@ public class StatisticsFragment extends Fragment {
             dateSelector(30, spinnerDropdown);
             break;
         }
-        lineChart.notifyDataSetChanged();
-        lineChart.invalidate();
       }
     });
   }
@@ -78,29 +75,34 @@ public class StatisticsFragment extends Fragment {
   private void dateSelector(int sizetoplot, BootstrapDropDown spinner) {
     recordsSize = pushuprecordMain.size();
     if(recordsSize > 0) {
+      final List<PushUpModel> pushing;
       int start = recordsSize - sizetoplot;
       if (start >= 1) {
-        pushuprecordsSubset = pushuprecordMain.subList(start, recordsSize);
+        pushing = pushuprecordMain.subList(start, recordsSize);
       } else {
-        pushuprecordsSubset = pushuprecordMain;
+        pushing = pushuprecordMain;
       }
       ArrayList<Entry> pushUps = new ArrayList<>();
       ArrayList<String> labels = new ArrayList<>();
-      for (PushUpModel pushUpModel: pushuprecordsSubset) {
+      for (PushUpModel pushUpModel: pushing) {
         pushUps.add(new Entry((float) pushUpModel.pushups, ((int) (long) pushUpModel.getId()) - 1));
         labels.add(pushUpModel.currentDay);
       }
       LineDataSet dataSet = new LineDataSet(pushUps, "Push ups chart");
       LineData data = new LineData(labels, dataSet);
       lineChart.setData(data);
+      lineChart.notifyDataSetChanged();
       dataSet.setDrawFilled(true);
       dataSet.setDrawCubic(true);
       lineChart.setDescription("Chart for the number of pushups done so far");
+      lineChart.invalidate();
       spinner.setText(String.format("Last %d Days", sizetoplot));
     } else {
       LinearLayout layout = (LinearLayout) viewing.findViewById(R.id.noNoteLayout);
       layout.setVisibility(View.VISIBLE);
     }
   }
+
+
 
 }
