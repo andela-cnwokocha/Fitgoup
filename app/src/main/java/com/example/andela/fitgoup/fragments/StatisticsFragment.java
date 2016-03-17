@@ -1,8 +1,11 @@
 package com.example.andela.fitgoup.fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
+import android.os.DropBoxManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +14,19 @@ import android.widget.LinearLayout;
 import com.beardedhen.androidbootstrap.BootstrapDropDown;
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.model.PushUpModel;
-
-import org.eazegraph.lib.charts.ValueLineChart;
-import org.eazegraph.lib.models.ValueLinePoint;
-import org.eazegraph.lib.models.ValueLineSeries;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StatisticsFragment extends Fragment {
   private List<PushUpModel> pushuprecordMain;
-  private List<PushUpModel> pushuprecordsSubset = new ArrayList<>();
-  private ValueLineSeries series;
   private View viewing;
   private int recordsSize;
+  private LineChart lineChart;
 
 
   public StatisticsFragment() {
@@ -41,8 +43,11 @@ public class StatisticsFragment extends Fragment {
   public void onViewCreated(View view, Bundle savedInstance) {
     viewing = view;
     final BootstrapDropDown spinnerDropdown = (BootstrapDropDown) view.findViewById(R.id.mydropdown);
+    lineChart = (LineChart) view.findViewById(R.id.linechart);
     pushuprecordMain = PushUpModel.fetchPushups();
+
     dateSelector(5, spinnerDropdown);
+
     spinnerDropdown.setOnDropDownItemClickListener(new BootstrapDropDown.OnDropDownItemClickListener() {
       @Override
       public void onItemClick(ViewGroup parent, View v, int id) {
@@ -69,27 +74,35 @@ public class StatisticsFragment extends Fragment {
 
   private void dateSelector(int sizetoplot, BootstrapDropDown spinner) {
     recordsSize = pushuprecordMain.size();
-    if (recordsSize > 0) {
-      int recordsSize = pushuprecordMain.size();
-      final ValueLineChart mCubicValueLineChart = (ValueLineChart) viewing.findViewById(R.id.linechart);
-      series = new ValueLineSeries();
-      series.setColor(0xFF56B7F1);
+    if(recordsSize > 0) {
+      final List<PushUpModel> pushing;
       int start = recordsSize - sizetoplot;
       if (start >= 1) {
-        pushuprecordsSubset = pushuprecordMain.subList(start, recordsSize);
+        pushing = pushuprecordMain.subList(start, recordsSize);
       } else {
-        pushuprecordsSubset = pushuprecordMain;
+        pushing = pushuprecordMain;
       }
-      for (PushUpModel pushUpModel: pushuprecordsSubset) {
-        series.addPoint(new ValueLinePoint(pushUpModel.currentDay, (float)pushUpModel.pushups));
+      ArrayList<Entry> pushUps = new ArrayList<>();
+      ArrayList<String> labels = new ArrayList<>();
+      for (PushUpModel pushUpModel: pushing) {
+        pushUps.add(new Entry((float) pushUpModel.pushups, ((int) (long) pushUpModel.getId()) - 1));
+        labels.add(pushUpModel.currentDay);
       }
+      LineDataSet dataSet = new LineDataSet(pushUps, "Push ups chart");
+      LineData data = new LineData(labels, dataSet);
+      lineChart.setData(data);
+      lineChart.notifyDataSetChanged();
+      dataSet.setDrawFilled(true);
+      dataSet.setDrawCubic(true);
+      lineChart.setDescription("Chart for the number of pushups done so far");
+      lineChart.invalidate();
       spinner.setText(String.format("Last %d Days", sizetoplot));
-      mCubicValueLineChart.addSeries(series);
-      mCubicValueLineChart.startAnimation();
     } else {
       LinearLayout layout = (LinearLayout) viewing.findViewById(R.id.noNoteLayout);
       layout.setVisibility(View.VISIBLE);
     }
   }
+
+
 
 }

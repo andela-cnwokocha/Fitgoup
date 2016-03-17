@@ -162,7 +162,6 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
 
   private void savePushups(long pushup) {
     List<PushUpModel> push = PushUpModel.fetchPushups();
-    Log.i("PUSHZiii", "INIT Size: "+PushUpModel.fetchPushups().size());
     boolean dateExists = false;
     if (push.size() > 0) {
       for (PushUpModel pushUpModel : push) {
@@ -173,19 +172,16 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
           savedPushup.save();
         }
       }
-      if (!dateExists) {// Not tested yet until tomorrow
+      for (PushUpModel pis:push) {
+        Log.i("pis", " "+pis.pushups+" "+pis.currentDay);
+      }
+      if (!dateExists) {
         PushUpModel pushUpModel = new PushUpModel(pushup, getLogTime());
         pushUpModel.save();
       }
     } else {
       PushUpModel pushUpModel = new PushUpModel(pushup, getLogTime());
       pushUpModel.save();
-    }
-    Log.i("PUSHZiii", "END Size: "+PushUpModel.fetchPushups().size());
-    List<PushUpModel> newpush = PushUpModel.fetchPushups(); {
-      for (PushUpModel p: newpush) {
-        Log.i("PUSHZiii", "ID: "+p.getId()+" DATE: "+p.currentDay+" VAL: "+p.pushups);
-      }
     }
   }
 
