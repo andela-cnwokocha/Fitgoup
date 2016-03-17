@@ -38,4 +38,23 @@
             />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="Push ups Schedule">
+        <SwitchPreferenceCompat
+            android:key="pushup_time"
+            android:title="Push-ups Countdown"
+            android:summary="Set time for training"
+            android:defaultValue="false"/>
+
+        <NumberPickerPreference
+            android:defaultValue="3"
+            android:key="pushup_day"
+            android:title="Remind me every 3 day(s)"
+            android:dependency="pushup_time"
+            app:maxValue="365"
+            app:minValue="1"
+            app:valueAsSummary="false"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
