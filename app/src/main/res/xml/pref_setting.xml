@@ -26,7 +26,7 @@
             android:key="pushup_switch"
             android:title="Push-ups Countdown"
             android:summary="Countdown to the number of pushup"
-            android:defaultValue="true"/>
+            android:defaultValue="false"/>
         <NumberPickerPreference
             android:defaultValue="10"
             android:key="push_count"
