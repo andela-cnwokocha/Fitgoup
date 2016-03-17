@@ -20,8 +20,7 @@
             android:layout_gravity="center"
             android:id="@+id/noNote_text"
             android:textSize="20sp"
-            android:paddingBottom="30dp"
-            android:text="@string/no_data"/>
+            android:paddingBottom="30dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,21 +42,11 @@
             app:dropdownResource="@array/days_filter_array"
             app:bootstrapExpandDirection="down"/>
 
-
-        <org.eazegraph.lib.charts.ValueLineChart
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/linechart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            app:egUseCubic="true"
-            app:egUseOverlapFill="true"
-            app:egCurveSmoothness="0.4"
-            app:egIndicatorLineColor="@color/colorAccent"
-            app:egLegendHeight="40dp"
-            app:egShowStandardValue="true"
-            app:egLegendColor="@color/colorPrimaryText"
-            app:egEmptyDataText="Push Ups"/>
+            android:layout_weight="3"/>
     </LinearLayout>
 
 </FrameLayout>
