@@ -56,10 +56,11 @@ public class HomeDashboard extends AppCompatActivity {
     tabs.setupWithViewPager(mViewPager);
     setTabIcons();
 
-    TypefaceProvider.registerDefaultIconSets();
+    //TypefaceProvider.registerDefaultIconSets();
     /*PushUpModel pushUpModel = new PushUpModel(14, "Mar 1, 2016");
     pushUpModel.save();
-    PushUpModel.clearData();*/
+    PushUpModel.clearData();
+    ;*/
   }
 
   public void setTabIcons() {
