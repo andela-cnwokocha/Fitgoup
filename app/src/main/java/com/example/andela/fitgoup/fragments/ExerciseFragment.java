@@ -138,8 +138,8 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
     timeroption = preferences.getBoolean("timer_switch", false);
     countdownoption = preferences.getBoolean("pushup_switch", false);
-    timerCount = Integer.parseInt(preferences.getString("timer_count", "5"));
-    countDownCount = Integer.parseInt(preferences.getString("pushup_count", "10"));
+    timerCount = preferences.getInt("time_count", 5);
+    countDownCount = preferences.getInt("push_count", 10);
 
   }
 
@@ -172,9 +172,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
           savedPushup.save();
         }
       }
-      for (PushUpModel pis:push) {
-        Log.i("pis", " "+pis.pushups+" "+pis.currentDay);
-      }
+
       if (!dateExists) {
         PushUpModel pushUpModel = new PushUpModel(pushup, getLogTime());
         pushUpModel.save();
