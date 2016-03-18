@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:name="com.example.andela.fitgoup.fragments.SettingsFragment">
 
     <PreferenceCategory
         android:title="Select Pushups option"
@@ -55,6 +56,12 @@
             app:minValue="1"
             app:valueAsSummary="false"/>
 
+        <com.example.andela.fitgoup.utils.TimePreferencePicker
+            android:key="pushup_hour"
+            android:title="HH:MM"
+            android:defaultValue="12:00"
+            android:dependency="pushup_time"/>
     </PreferenceCategory>
+
 
 </PreferenceScreen>
