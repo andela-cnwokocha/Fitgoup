@@ -3,11 +3,17 @@ package com.example.andela.fitgoup.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import me.philio.preferencecompatextended.PreferenceFragmentCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Log;
 
 import com.example.andela.fitgoup.R;
+import com.example.andela.fitgoup.utils.TimePickerDialogFragmentCompat;
+import com.example.andela.fitgoup.utils.TimePreferencePicker;
+
+import me.philio.preferencecompatextended.PreferenceFragmentCompat;
+
 /**
  * Created by andela on 3/6/16.
  */
@@ -42,6 +48,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
           sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
           int val = sharedPreferences.getInt("pushup_day", 3);
           findPreference("pushup_day").setTitle(String.format("Remind me every %d day(s)",val));
+        } else if(key.equals("pushup_hour") && scheduleTime.isChecked()) {
+          sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+          findPreference("pushup_hour").setTitle(sharedPreferences.getString("pushup_hour", "12:00"));
         }
       }
     };
@@ -58,6 +67,29 @@ public class SettingsFragment extends PreferenceFragmentCompat {
   public void onPause() {
     super.onPause();
     getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(listener);
+  }
+
+  @Override
+  public void onDisplayPreferenceDialog(Preference preference)
+  {
+    DialogFragment dialogFragment = null;
+    if (preference instanceof TimePreferencePicker)
+    {
+      dialogFragment = new TimePickerDialogFragmentCompat();
+      Bundle bundle = new Bundle(1);
+      bundle.putString("key", preference.getKey());
+      dialogFragment.setArguments(bundle);
+    }
+
+    if (dialogFragment != null)
+    {
+      dialogFragment.setTargetFragment(this, 0);
+      dialogFragment.show(this.getFragmentManager(), "android.support.v7.preference.PreferenceFragment.DIALOG");
+    }
+    else
+    {
+      super.onDisplayPreferenceDialog(preference);
+    }
   }
 
 }
