@@ -1,6 +1,13 @@
 package com.example.andela.fitgoup.activities;
 
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,6 +16,7 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +27,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.example.andela.fitgoup.R;
@@ -28,8 +38,11 @@ import com.example.andela.fitgoup.fragments.StatisticsFragment;
 import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.InfoFragment;
 import com.example.andela.fitgoup.model.PushUpModel;
+import com.example.andela.fitgoup.notification.AlarmBroadcast;
+import com.example.andela.fitgoup.notification.UserAlarmService;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class HomeDashboard extends AppCompatActivity {
@@ -40,6 +53,10 @@ public class HomeDashboard extends AppCompatActivity {
       R.drawable.ic_settings_white,
       R.drawable.ic_show_chart,
       R.drawable.ic_calendar};
+  private PendingIntent pendingIntent;
+  private AlarmManager alarmManager;
+  private SharedPreferences preferences;
+  private Calendar calendar;
 
   public HomeDashboard() {}
 
@@ -56,11 +73,25 @@ public class HomeDashboard extends AppCompatActivity {
     tabs.setupWithViewPager(mViewPager);
     setTabIcons();
 
+    // Initialize preferences
+    //PreferenceManager.setDefaultValues(this, R.xml.pref_setting, false);
     //TypefaceProvider.registerDefaultIconSets();
     /*PushUpModel pushUpModel = new PushUpModel(14, "Mar 1, 2016");
     pushUpModel.save();
     PushUpModel.clearData();
     ;*/
+    preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+    SharedPreferences prefs = this.getSharedPreferences("ALARM_COUNT", MODE_PRIVATE);
+    SharedPreferences.Editor edit = prefs.edit();
+    int alarms = prefs.getInt("numberofalarm", 1);
+
+    if (alarms < 2) {
+      startAlarm();
+      alarms++;
+      edit.putInt("numberofalarm",alarms);
+      edit.apply();
+    }
   }
 
   public void setTabIcons() {
@@ -115,4 +146,19 @@ public class HomeDashboard extends AppCompatActivity {
     }
   }
 
+  private void startAlarm() {
+    Intent intent = new Intent(getApplicationContext(), AlarmBroadcast.class);
+    final PendingIntent pIntent = PendingIntent.getBroadcast(this, AlarmBroadcast.NOTIFY_ID,
+        intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+    // The time to fire
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MINUTE, 35);
+    calendar.set(Calendar.HOUR, 2);
+    calendar.set(Calendar.AM_PM,Calendar.PM);
+
+    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000, pIntent);
+  }
 }
