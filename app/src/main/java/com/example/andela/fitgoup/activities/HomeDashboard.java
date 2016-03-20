@@ -161,6 +161,7 @@ public class HomeDashboard extends AppCompatActivity {
     AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
         AlarmManager.INTERVAL_DAY*preferences.getInt("pushup_day", 1), pIntent);
+    //
   }
 
   private int getMinute() {
