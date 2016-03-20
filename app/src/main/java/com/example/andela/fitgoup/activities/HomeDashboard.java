@@ -60,6 +60,7 @@ public class HomeDashboard extends AppCompatActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    TypefaceProvider.registerDefaultIconSets();
     setContentView(R.layout.activity_home_dashboard);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setTitle("PushFit");
@@ -71,9 +72,10 @@ public class HomeDashboard extends AppCompatActivity {
 
     setTabIcons();
 
+
     // Initialize preferences
     //PreferenceManager.setDefaultValues(this, R.xml.pref_setting, false);
-    //TypefaceProvider.registerDefaultIconSets();
+    //
     /*PushUpModel pushUpModel = new PushUpModel(14, "Mar 1, 2016");
     pushUpModel.save();
     PushUpModel.clearData();
@@ -89,8 +91,8 @@ public class HomeDashboard extends AppCompatActivity {
         alarms++;
         edit.putInt("numberofalarm",alarms);
         edit.apply();
-     //}
-    }
+     }
+    //}
 
   }
 
@@ -161,7 +163,6 @@ public class HomeDashboard extends AppCompatActivity {
     AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
         AlarmManager.INTERVAL_DAY*preferences.getInt("pushup_day", 1), pIntent);
-    //
   }
 
   private int getMinute() {
