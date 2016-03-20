@@ -11,6 +11,8 @@ import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.utils.TimePickerDialogFragmentCompat;
 import com.example.andela.fitgoup.utils.TimePreferencePicker;
 
+import java.util.Date;
+
 import me.philio.preferencecompatextended.PreferenceFragmentCompat;
 
 /**
