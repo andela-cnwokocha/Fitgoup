@@ -7,8 +7,6 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.andela.fitgoup.R;
@@ -18,7 +16,6 @@ import com.example.andela.fitgoup.activities.HomeDashboard;
  * Created by andela on 3/18/16.
  */
 public class AlarmBroadcast extends BroadcastReceiver {
-  public static final int REQUEST_CODE = 12345;
   public static final int NOTIFY_ID = 5;
   private static boolean isNotificationActive = false;
   private NotificationManager nm;

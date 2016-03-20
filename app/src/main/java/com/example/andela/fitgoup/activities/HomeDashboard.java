@@ -81,17 +81,22 @@ public class HomeDashboard extends AppCompatActivity {
     PushUpModel.clearData();
     ;*/
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
+    Log.i("EFIZ",""+preferences.getBoolean("pushup_time", false));
 
-    SharedPreferences prefs = this.getSharedPreferences("ALARM_COUNT", MODE_PRIVATE);
-    SharedPreferences.Editor edit = prefs.edit();
-    int alarms = prefs.getInt("numberofalarm", 1);
+    if (preferences.getBoolean("pushup_time", false)) {
+      SharedPreferences prefs = this.getSharedPreferences("ALARM_COUNT", MODE_PRIVATE);
+      SharedPreferences.Editor edit = prefs.edit();
+      int alarms = prefs.getInt("numberofalarm", 1);
 
-    if (alarms < 2) {
-      startAlarm();
-      alarms++;
-      edit.putInt("numberofalarm",alarms);
-      edit.apply();
+      // Initiate alarm so it doesn't run for every oncreate
+      if (alarms < 2) {
+        startAlarm();
+        alarms++;
+        edit.putInt("numberofalarm",alarms);
+        edit.apply();
+      }
     }
+
   }
 
   public void setTabIcons() {
@@ -154,11 +159,11 @@ public class HomeDashboard extends AppCompatActivity {
     // The time to fire
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MINUTE, 35);
-    calendar.set(Calendar.HOUR, 2);
+    calendar.set(Calendar.MINUTE, 3);
+    calendar.set(Calendar.HOUR, 3);
     calendar.set(Calendar.AM_PM,Calendar.PM);
 
     AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000, pIntent);
+    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000*5, pIntent);
   }
 }
