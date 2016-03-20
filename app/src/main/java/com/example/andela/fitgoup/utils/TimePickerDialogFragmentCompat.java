@@ -24,7 +24,7 @@ public class TimePickerDialogFragmentCompat extends PreferenceDialogFragmentComp
   @Override
   protected void onBindDialogView(View v) {
     super.onBindDialogView(v);
-    timePicker.setIs24HourView(true);
+    timePicker.setIs24HourView(false);
     TimePreferencePicker pref = (TimePreferencePicker) getPreference();
     timePicker.setCurrentHour(pref.hour);
     timePicker.setCurrentMinute(pref.minute);
