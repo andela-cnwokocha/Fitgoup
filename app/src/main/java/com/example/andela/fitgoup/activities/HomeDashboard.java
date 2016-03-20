@@ -53,10 +53,7 @@ public class HomeDashboard extends AppCompatActivity {
       R.drawable.ic_settings_white,
       R.drawable.ic_show_chart,
       R.drawable.ic_calendar};
-  private PendingIntent pendingIntent;
-  private AlarmManager alarmManager;
   private SharedPreferences preferences;
-  private Calendar calendar;
 
   public HomeDashboard() {}
 
@@ -71,6 +68,7 @@ public class HomeDashboard extends AppCompatActivity {
     setUpPager(mViewPager);
     tabs = (TabLayout) findViewById(R.id.tabs);
     tabs.setupWithViewPager(mViewPager);
+
     setTabIcons();
 
     // Initialize preferences
@@ -81,20 +79,17 @@ public class HomeDashboard extends AppCompatActivity {
     PushUpModel.clearData();
     ;*/
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
-    Log.i("EFIZ",""+preferences.getBoolean("pushup_time", false));
 
-    if (preferences.getBoolean("pushup_time", false)) {
+    if (preferences.getBoolean("pushup_time", true)) {
       SharedPreferences prefs = this.getSharedPreferences("ALARM_COUNT", MODE_PRIVATE);
       SharedPreferences.Editor edit = prefs.edit();
       int alarms = prefs.getInt("numberofalarm", 1);
-
-      // Initiate alarm so it doesn't run for every oncreate
-      if (alarms < 2) {
+      //if (alarms < 2) {
         startAlarm();
         alarms++;
         edit.putInt("numberofalarm",alarms);
         edit.apply();
-      }
+     //}
     }
 
   }
@@ -158,12 +153,23 @@ public class HomeDashboard extends AppCompatActivity {
 
     // The time to fire
     Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(System.currentTimeMillis());
     calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MINUTE, 3);
-    calendar.set(Calendar.HOUR, 3);
-    calendar.set(Calendar.AM_PM,Calendar.PM);
+    calendar.set(Calendar.MINUTE, getMinute());
+    calendar.set(Calendar.HOUR_OF_DAY, getHour());
 
     AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 60000*5, pIntent);
+    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+        AlarmManager.INTERVAL_DAY*preferences.getInt("pushup_day", 1), pIntent);
+  }
+
+  private int getMinute() {
+    String val = preferences.getString("pushup_hour", "12:00");
+    return Integer.parseInt(val.split(":")[1]);
+  }
+
+  private int getHour() {
+    String val = preferences.getString("pushup_hour", "12:00");
+    return Integer.parseInt(val.split(":")[0]);
   }
 }
