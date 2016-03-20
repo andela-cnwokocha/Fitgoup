@@ -10,8 +10,6 @@ import android.content.Intent;
 public class UserAlarmService extends IntentService {
 
   public static final String CREATE = "CREATE";
-  public static final String CANCEL = "CANCEL";
-
 
   public UserAlarmService() {
     super("user-service");
