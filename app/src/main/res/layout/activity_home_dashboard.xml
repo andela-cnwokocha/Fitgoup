@@ -28,6 +28,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/bootstrap_h1_vert_padding"
             app:tabMode="scrollable"
             app:tabGravity="fill"/>
 
