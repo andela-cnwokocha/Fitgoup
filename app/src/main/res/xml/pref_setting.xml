@@ -45,10 +45,10 @@
             android:key="pushup_time"
             android:title="Push Ups Plan"
             android:summary="Set your training plan"
-            android:defaultValue="false"/>
+            android:defaultValue="true"/>
 
         <NumberPickerPreference
-            android:defaultValue="3"
+            android:defaultValue="1"
             android:key="pushup_day"
             android:title="Remind me every "
             android:dependency="pushup_time"
