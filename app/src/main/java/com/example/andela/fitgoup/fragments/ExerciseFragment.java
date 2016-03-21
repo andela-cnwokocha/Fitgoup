@@ -73,9 +73,11 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     pushups = (EditText) view.findViewById(R.id.pushup_num);
     saveButton = (Button) view.findViewById(R.id.save_button);
     timerview = (TextView) view.findViewById(R.id.timer_field);
+    setCountOptions();
+    setTimerTextview();
     mSensorManager = (SensorManager) getActivity().getSystemService(getActivity().SENSOR_SERVICE);
     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-    setCountOptions();
+
     saveButton();
     startbutton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -101,6 +103,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
           timerview.setText(R.string.init_timer);
           startbutton.setText(R.string.start_timer);
           recordLayout.setVisibility(View.INVISIBLE);
+          counter = 0;
         }
       }
     });
@@ -227,6 +230,14 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     Date currentTime = new Date();
     Locale myLocale = new Locale("en");
     return DateFormat.getDateInstance(DateFormat.DEFAULT, myLocale).format(currentTime);
+  }
+
+  private void setTimerTextview() {
+    if(timeroption) {
+      setCounterView(timerCount * 60000);
+    } else {
+      timerview.setText(String.format("%s", counter));
+    }
   }
 
 }
