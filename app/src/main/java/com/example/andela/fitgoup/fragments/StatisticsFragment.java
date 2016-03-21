@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.beardedhen.androidbootstrap.BootstrapDropDown;
 import com.example.andela.fitgoup.R;
+import com.example.andela.fitgoup.activities.HomeDashboard;
 import com.example.andela.fitgoup.model.PushUpModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -102,7 +103,4 @@ public class StatisticsFragment extends Fragment {
       layout.setVisibility(View.VISIBLE);
     }
   }
-
-
-
 }
