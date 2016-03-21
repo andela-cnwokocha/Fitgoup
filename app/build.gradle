@@ -38,4 +38,5 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.3'
     compile 'me.philio:preferencecompatextended:1.0.0'
     compile 'com.prolificinteractive:material-calendarview:1.2.0'
+    compile 'com.jaredrummler:material-spinner:1.0.5'
 }

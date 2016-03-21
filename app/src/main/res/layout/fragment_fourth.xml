@@ -29,19 +29,10 @@
         android:orientation="vertical"
         android:padding="@dimen/bootstrap_h1_vert_padding">
 
-        <com.beardedhen.androidbootstrap.BootstrapDropDown
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+        <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/mydropdown"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            app:bootstrapText="Filter "
-            app:paddingStart="@dimen/bootstrap_h1_vert_padding"
-            app:bootstrapBrand="regular"
-            app:roundedCorners="true"
-            app:bootstrapSize="md"
-            app:dropdownResource="@array/days_filter_array"
-            app:bootstrapExpandDirection="down"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/linechart"

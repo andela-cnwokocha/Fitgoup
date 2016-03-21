@@ -19,6 +19,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,16 +44,18 @@ public class StatisticsFragment extends Fragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstance) {
     viewing = view;
-    final BootstrapDropDown spinnerDropdown = (BootstrapDropDown) view.findViewById(R.id.mydropdown);
+    final MaterialSpinner spinnerDropdown = (MaterialSpinner) view.findViewById(R.id.mydropdown);
+    spinnerDropdown.setItems("Last 5 Days", "Last 7 Days", "Last 14 Days", "Last 21 Days", "Last 30 Days");
     lineChart = (LineChart) view.findViewById(R.id.linechart);
     pushuprecordMain = PushUpModel.fetchPushups();
 
     dateSelector(5, spinnerDropdown);
 
-    spinnerDropdown.setOnDropDownItemClickListener(new BootstrapDropDown.OnDropDownItemClickListener() {
+    spinnerDropdown.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
       @Override
-      public void onItemClick(ViewGroup parent, View v, int id) {
-        switch (id) {
+      public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+        Log.i("Datar", "Going");
+        /*switch (id) {
           case 0:
             dateSelector(5, spinnerDropdown);
             break;
@@ -68,12 +71,12 @@ public class StatisticsFragment extends Fragment {
           case 4:
             dateSelector(30, spinnerDropdown);
             break;
-        }
+        }*/
       }
     });
   }
 
-  private void dateSelector(int sizetoplot, BootstrapDropDown spinner) {
+  private void dateSelector(int sizetoplot, MaterialSpinner spinner) {
     recordsSize = pushuprecordMain.size();
     if(recordsSize > 0) {
       final List<PushUpModel> pushing;
