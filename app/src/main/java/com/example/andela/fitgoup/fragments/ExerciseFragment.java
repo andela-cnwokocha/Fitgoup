@@ -1,6 +1,7 @@
 package com.example.andela.fitgoup.fragments;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,6 +19,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -73,9 +76,11 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     pushups = (EditText) view.findViewById(R.id.pushup_num);
     saveButton = (Button) view.findViewById(R.id.save_button);
     timerview = (TextView) view.findViewById(R.id.timer_field);
+    setCountOptions();
+    setTimerTextview();
     mSensorManager = (SensorManager) getActivity().getSystemService(getActivity().SENSOR_SERVICE);
     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-    setCountOptions();
+
     saveButton();
     startbutton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -98,9 +103,10 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
             countDownTimer.cancel();
           }
           mSensorManager.unregisterListener(ExerciseFragment.this);
-          timerview.setText(R.string.init_timer);
+          setTimerTextview();
           startbutton.setText(R.string.start_timer);
           recordLayout.setVisibility(View.INVISIBLE);
+          counter = 0;
         }
       }
     });
@@ -112,9 +118,10 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
         setCounterView(millisUntilFinished/1000);
       }
       public void onFinish() {
-        timerview.setText("done!");
+        timerview.setText("Done!");
         startbutton.setText(R.string.restart_button);
         pushups.setVisibility(View.VISIBLE);
+        startbutton.setVisibility(View.GONE);
         saveButton.setText("Save Record");
         saveButton.setClickable(true);
         recordLayout.setVisibility(View.VISIBLE);
@@ -150,8 +157,15 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
         int values = pushups.getText().toString().trim().length();
         if ((values > 0) && startbutton.getText().equals("Restart")) {
           savePushups(processedpushup());
+
+          View homeDashboard = getActivity().getCurrentFocus();
+          if (homeDashboard != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(homeDashboard.getWindowToken(), 0);
+          }
           pushups.setVisibility(View.GONE);
           saveButton.setText("Saved");
+          startbutton.setVisibility(View.VISIBLE);
           saveButton.setClickable(false);
         } else {
           pushups.setError("No Pushups entered");
@@ -181,6 +195,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
       PushUpModel pushUpModel = new PushUpModel(pushup, getLogTime());
       pushUpModel.save();
     }
+    pushups.setText("");
   }
 
   private long processedpushup() {
@@ -215,6 +230,10 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   public void onResume() {
     super.onResume();
     mSensorManager.unregisterListener(this);
+    View vg = getView().findViewById(R.id.exercise_fragment);
+    vg.invalidate();
+    setCountOptions();
+    setTimerTextview();
   }
 
   @Override
@@ -229,5 +248,12 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     return DateFormat.getDateInstance(DateFormat.DEFAULT, myLocale).format(currentTime);
   }
 
+  private void setTimerTextview() {
+    if(timeroption) {
+      setCounterView((timerCount * 60000)/1000);
+    } else {
+      timerview.setText(String.format("%s", counter));
+    }
+  }
 }
 

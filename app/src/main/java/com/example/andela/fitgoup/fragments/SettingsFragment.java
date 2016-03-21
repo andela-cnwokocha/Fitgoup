@@ -6,12 +6,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.utils.TimePickerDialogFragmentCompat;
 import com.example.andela.fitgoup.utils.TimePreferencePicker;
-
-import java.util.Date;
 
 import me.philio.preferencecompatextended.PreferenceFragmentCompat;
 
