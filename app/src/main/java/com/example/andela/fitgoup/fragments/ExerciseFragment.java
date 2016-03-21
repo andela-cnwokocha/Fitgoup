@@ -1,6 +1,7 @@
 package com.example.andela.fitgoup.fragments;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -155,6 +157,12 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
         int values = pushups.getText().toString().trim().length();
         if ((values > 0) && startbutton.getText().equals("Restart")) {
           savePushups(processedpushup());
+
+          View homeDashboard = getActivity().getCurrentFocus();
+          if (homeDashboard != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(homeDashboard.getWindowToken(), 0);
+          }
           pushups.setVisibility(View.GONE);
           saveButton.setText("Saved");
           startbutton.setVisibility(View.VISIBLE);
