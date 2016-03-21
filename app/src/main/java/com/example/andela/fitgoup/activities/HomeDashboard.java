@@ -158,8 +158,4 @@ public class HomeDashboard extends AppCompatActivity {
     String val = preferences.getString("pushup_hour", "12:00");
     return Integer.parseInt(val.split(":")[0]);
   }
-  /*private void refreshLayout() {
-    ViewGroup vg = findViewById(R.id);
-    vg.invalidate();
-  }*/
 }
