@@ -6,9 +6,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.utils.TimePickerDialogFragmentCompat;
@@ -58,7 +55,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         } else if (key.equals("pushup_hour") && scheduleTime.isChecked()) {
           sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
           findPreference("pushup_hour").setTitle(sharedPreferences.getString("pushup_hour", "12:00"));
-          findPreference("pushup_hour").setSummary("Please restart the application");
         }
       }
     };

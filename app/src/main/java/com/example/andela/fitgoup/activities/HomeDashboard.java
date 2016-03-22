@@ -1,10 +1,6 @@
 package com.example.andela.fitgoup.activities;
 
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,11 +19,8 @@ import com.example.andela.fitgoup.fragments.ExerciseFragment;
 import com.example.andela.fitgoup.fragments.InfoFragment;
 import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.StatisticsFragment;
-import com.example.andela.fitgoup.model.PushUpModel;
-import com.example.andela.fitgoup.notification.AlarmBroadcast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class HomeDashboard extends AppCompatActivity {
@@ -78,17 +71,6 @@ public class HomeDashboard extends AppCompatActivity {
     PushUpModel data8 = new PushUpModel(13, "Mar 17, 2016");
     data8.save();*/
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
-    SharedPreferences prefs = this.getSharedPreferences("alarm_time", MODE_PRIVATE);
-    if (preferences.getBoolean("pushup_time", true)) {
-      SharedPreferences.Editor edit = prefs.edit();
-      int alarms = prefs.getInt("numberofalarm", 1);
-      if (alarms < 2) {
-        startAlarm();
-        alarms++;
-        edit.putInt("numberofalarm",alarms);
-        edit.apply();
-      }
-    }
   }
 
   public void setTabIcons() {
@@ -148,35 +130,7 @@ public class HomeDashboard extends AppCompatActivity {
       titles.add(fragmentTitle);
     }
   }
-
-  private void startAlarm() {
-    Intent intent = new Intent(getApplicationContext(), AlarmBroadcast.class);
-    final PendingIntent pIntent = PendingIntent.getBroadcast(this, AlarmBroadcast.NOTIFY_ID,
-        intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-    // The time to fire
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTimeInMillis(System.currentTimeMillis());
-    calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MINUTE, getMinute());
-    calendar.set(Calendar.HOUR_OF_DAY, getHour());
-
-    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-        AlarmManager.INTERVAL_DAY*preferences.getInt("pushup_day", 1), pIntent);
-  }
-
-  private int getMinute() {
-    String val = preferences.getString("pushup_hour", "12:00");
-    return Integer.parseInt(val.split(":")[1]);
-  }
-
-  private int getHour() {
-    String val = preferences.getString("pushup_hour", "12:00");
-    return Integer.parseInt(val.split(":")[0]);
-  }
-
-  @Override
+  /*@Override
   protected void onDestroy() {
     super.onDestroy();
 
@@ -189,5 +143,5 @@ public class HomeDashboard extends AppCompatActivity {
       edit.putInt("numberofalarm",1);
       edit.apply();
     }
-  }
+  }*/
 }
