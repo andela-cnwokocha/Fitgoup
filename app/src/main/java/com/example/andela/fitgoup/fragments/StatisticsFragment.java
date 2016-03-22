@@ -16,9 +16,12 @@ import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.activities.HomeDashboard;
 import com.example.andela.fitgoup.model.PushUpModel;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,61 +46,75 @@ public class StatisticsFragment extends Fragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstance) {
     viewing = view;
-    final BootstrapDropDown spinnerDropdown = (BootstrapDropDown) view.findViewById(R.id.mydropdown);
+    final MaterialSpinner spinnerDropdown = (MaterialSpinner) view.findViewById(R.id.mydropdown);
+    spinnerDropdown.setItems("Last 5 Days", "Last 7 Days", "Last 14 Days", "Last 21 Days", "Last 30 Days");
     lineChart = (LineChart) view.findViewById(R.id.linechart);
     pushuprecordMain = PushUpModel.fetchPushups();
 
-    dateSelector(5, spinnerDropdown);
+    dateSelector(5);
 
-    spinnerDropdown.setOnDropDownItemClickListener(new BootstrapDropDown.OnDropDownItemClickListener() {
+    spinnerDropdown.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
       @Override
-      public void onItemClick(ViewGroup parent, View v, int id) {
-        switch (id) {
+      public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+        switch (position) {
           case 0:
-            dateSelector(5, spinnerDropdown);
+            dateSelector(5);
             break;
           case 1:
-            dateSelector(7, spinnerDropdown);
+            dateSelector(7);
             break;
           case 2:
-            dateSelector(14, spinnerDropdown);
+            dateSelector(14);
             break;
           case 3:
-            dateSelector(21, spinnerDropdown);
+            dateSelector(21);
             break;
           case 4:
-            dateSelector(30, spinnerDropdown);
+            dateSelector(30);
             break;
         }
       }
     });
   }
 
-  private void dateSelector(int sizetoplot, BootstrapDropDown spinner) {
+  private void dateSelector(int sizeToPlot) {
     recordsSize = pushuprecordMain.size();
-    if(recordsSize > 0) {
-      final List<PushUpModel> pushing;
-      int start = recordsSize - sizetoplot;
-      if (start >= 1) {
-        pushing = pushuprecordMain.subList(start, recordsSize);
-      } else {
-        pushing = pushuprecordMain;
-      }
-      ArrayList<Entry> pushUps = new ArrayList<>();
+    LineDataSet dataset;
+    if (recordsSize > 0) {
+      ArrayList<Entry> pushups = new ArrayList<>();
       ArrayList<String> labels = new ArrayList<>();
-      for (PushUpModel pushUpModel: pushing) {
-        pushUps.add(new Entry((float) pushUpModel.pushups, ((int) (long) pushUpModel.getId()) - 1));
-        labels.add(pushUpModel.currentDay);
+      int start = recordsSize - sizeToPlot;
+
+      if (start > 0) {
+        List<PushUpModel> pushUpModels = pushuprecordMain.subList(start, recordsSize);
+        for (int i = 0; i < pushUpModels.size(); i++) {
+          pushups.add(new Entry((float) pushUpModels.get(i).pushups, i));
+          labels.add(pushUpModels.get(i).currentDay);
+        }
+        dataset = new LineDataSet(pushups, "Push ups chart");
+      } else {
+        for (PushUpModel model:pushuprecordMain) {
+          pushups.add(new Entry((float) model.pushups, ((int) (long) model.getId()) - 1));
+          labels.add(model.currentDay);
+        }
+        dataset = new LineDataSet(pushups, "Push ups chart");
       }
-      LineDataSet dataSet = new LineDataSet(pushUps, "Push ups chart");
-      LineData data = new LineData(labels, dataSet);
+      dataset.setAxisDependency(YAxis.AxisDependency.LEFT);
+      dataset.setDrawFilled(false);
+      dataset.setDrawCubic(true);
+      ArrayList<ILineDataSet> iLineDataSets = new ArrayList<ILineDataSet>();
+      iLineDataSets.add(dataset);
+
+      LineData data = new LineData(labels, iLineDataSets);
+
       lineChart.setData(data);
-      lineChart.notifyDataSetChanged();
-      dataSet.setDrawFilled(true);
-      dataSet.setDrawCubic(true);
-      lineChart.setDescription("Chart for the number of pushups done so far");
+      lineChart.setDescription("Push ups line chart");
+      lineChart.animateXY(2000, 2000);
+      lineChart.setDragEnabled(true);
+      lineChart.setScaleEnabled(true);
+      lineChart.setTouchEnabled(true);
+      lineChart.setPinchZoom(false);
       lineChart.invalidate();
-      spinner.setText(String.format("Last %d Days", sizetoplot));
     } else {
       LinearLayout layout = (LinearLayout) viewing.findViewById(R.id.noNoteLayout);
       layout.setVisibility(View.VISIBLE);

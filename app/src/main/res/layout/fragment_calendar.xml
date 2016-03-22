@@ -4,9 +4,12 @@
              android:layout_height="match_parent"
              tools:context="com.example.andela.fitgoup.fragments.CalendarFragment">
 
-    <TextView
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/calendar_fragment"/>
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="#00F"/>
 
 </FrameLayout>
