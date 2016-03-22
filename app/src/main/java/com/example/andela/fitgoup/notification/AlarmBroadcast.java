@@ -47,7 +47,6 @@ public class AlarmBroadcast extends BroadcastReceiver {
      nm.notify(NOTIFY_ID, notification);
      isNotificationActive = false;
      stopNotification();
-
      context.startService(intends);
    } else {
      cancelService(context);

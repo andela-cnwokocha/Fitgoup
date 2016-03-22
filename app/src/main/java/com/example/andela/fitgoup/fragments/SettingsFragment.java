@@ -58,6 +58,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         } else if (key.equals("pushup_hour") && scheduleTime.isChecked()) {
           sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
           findPreference("pushup_hour").setTitle(sharedPreferences.getString("pushup_hour", "12:00"));
+          findPreference("pushup_hour").setSummary("Please restart the application");
         }
       }
     };
