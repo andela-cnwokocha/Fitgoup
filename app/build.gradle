@@ -39,4 +39,5 @@ dependencies {
     compile 'me.philio:preferencecompatextended:1.0.0'
     compile 'com.prolificinteractive:material-calendarview:1.2.0'
     compile 'com.jaredrummler:material-spinner:1.0.5'
+    compile 'com.github.paolorotolo:appintro:3.4.0'
 }

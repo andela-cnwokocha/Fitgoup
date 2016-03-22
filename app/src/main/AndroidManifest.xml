@@ -2,7 +2,6 @@
 <manifest package="com.example.andela.fitgoup"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <application
         android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
@@ -10,37 +9,42 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="Pushup.db"/>
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="4" />
+            android:value="4"/>
 
         <activity
             android:name=".activities.HomeDashboard"
-            android:label="@string/title_activity_home_dashboard"
             android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_home_dashboard"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <receiver android:name=".notification.AlarmResetter">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".notification.AlarmBroadcast"
+            android:process=":remote"/>
+
+        <service
+            android:name=".notification.UserAlarmService"
+            android:exported="false"/>
+
+        <activity android:name=".activities.AppIntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <receiver android:name=".notification.AlarmResetter">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <receiver android:name=".notification.AlarmBroadcast"
-                  android:process=":remote"/>
-
-        <service android:name=".notification.UserAlarmService"
-            android:exported="false"/>
-
     </application>
+
 </manifest>
