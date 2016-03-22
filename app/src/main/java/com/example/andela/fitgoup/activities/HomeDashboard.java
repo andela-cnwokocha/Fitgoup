@@ -6,23 +6,23 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.fragments.CalendarFragment;
 import com.example.andela.fitgoup.fragments.ExerciseFragment;
-import com.example.andela.fitgoup.fragments.StatisticsFragment;
-import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.InfoFragment;
+import com.example.andela.fitgoup.fragments.SettingsFragment;
+import com.example.andela.fitgoup.fragments.StatisticsFragment;
 import com.example.andela.fitgoup.model.PushUpModel;
 import com.example.andela.fitgoup.notification.AlarmBroadcast;
 
@@ -56,9 +56,9 @@ public class HomeDashboard extends AppCompatActivity {
     tabs.setupWithViewPager(mViewPager);
 
     setTabIcons();
-    /*
-    PushUpModel.clearData();
-    ;*/
+
+    /*PushUpModel.clearData();*/
+
     /*PushUpModel data9 = new PushUpModel(32, "Mar 8, 2016");
     data9.save();
     PushUpModel data1 = new PushUpModel(16, "Mar 9, 2016");
@@ -78,19 +78,17 @@ public class HomeDashboard extends AppCompatActivity {
     PushUpModel data8 = new PushUpModel(13, "Mar 17, 2016");
     data8.save();*/
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+    SharedPreferences prefs = this.getSharedPreferences("alarm_time", MODE_PRIVATE);
     if (preferences.getBoolean("pushup_time", true)) {
-      SharedPreferences prefs = this.getSharedPreferences("ALARM_COUNT", MODE_PRIVATE);
       SharedPreferences.Editor edit = prefs.edit();
       int alarms = prefs.getInt("numberofalarm", 1);
-      //if (alarms < 2) {
+      if (alarms < 2) {
         startAlarm();
         alarms++;
         edit.putInt("numberofalarm",alarms);
         edit.apply();
-     }
-    //}
-
+      }
+    }
   }
 
   public void setTabIcons() {
@@ -176,5 +174,20 @@ public class HomeDashboard extends AppCompatActivity {
   private int getHour() {
     String val = preferences.getString("pushup_hour", "12:00");
     return Integer.parseInt(val.split(":")[0]);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+
+    Calendar time = Calendar.getInstance();
+    int currentHour = time.get(Calendar.HOUR_OF_DAY);
+    int currentMin = time.get(Calendar.MINUTE);
+    if ((currentHour < getHour()) && (currentMin < getMinute())) {
+      SharedPreferences prefs = this.getSharedPreferences("alarm_time", MODE_PRIVATE);
+      SharedPreferences.Editor edit = prefs.edit();
+      edit.putInt("numberofalarm",1);
+      edit.apply();
+    }
   }
 }

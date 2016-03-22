@@ -91,13 +91,13 @@ public class StatisticsFragment extends Fragment {
           pushups.add(new Entry((float) pushUpModels.get(i).pushups, i));
           labels.add(pushUpModels.get(i).currentDay);
         }
-        dataset = new LineDataSet(pushups, "Push ups chart");
+        dataset = new LineDataSet(pushups, "Push up chart");
       } else {
         for (PushUpModel model:pushuprecordMain) {
           pushups.add(new Entry((float) model.pushups, ((int) (long) model.getId()) - 1));
           labels.add(model.currentDay);
         }
-        dataset = new LineDataSet(pushups, "Push ups chart");
+        dataset = new LineDataSet(pushups, "Push up chart");
       }
       dataset.setAxisDependency(YAxis.AxisDependency.LEFT);
       dataset.setDrawFilled(false);
@@ -108,7 +108,7 @@ public class StatisticsFragment extends Fragment {
       LineData data = new LineData(labels, iLineDataSets);
 
       lineChart.setData(data);
-      lineChart.setDescription("Push ups line chart");
+      lineChart.setDescription("Daily push up count");
       lineChart.animateXY(2000, 2000);
       lineChart.setDragEnabled(true);
       lineChart.setScaleEnabled(true);
