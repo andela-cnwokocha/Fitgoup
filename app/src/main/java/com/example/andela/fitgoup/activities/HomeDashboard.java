@@ -23,6 +23,7 @@ import com.example.andela.fitgoup.fragments.ExerciseFragment;
 import com.example.andela.fitgoup.fragments.StatisticsFragment;
 import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.InfoFragment;
+import com.example.andela.fitgoup.model.PushUpModel;
 import com.example.andela.fitgoup.notification.AlarmBroadcast;
 
 import java.util.ArrayList;
@@ -58,6 +59,24 @@ public class HomeDashboard extends AppCompatActivity {
     /*
     PushUpModel.clearData();
     ;*/
+    /*PushUpModel data9 = new PushUpModel(32, "Mar 8, 2016");
+    data9.save();
+    PushUpModel data1 = new PushUpModel(16, "Mar 9, 2016");
+    data1.save();
+    PushUpModel data2 = new PushUpModel(20, "Mar 10, 2016");
+    data2.save();
+    PushUpModel data3 = new PushUpModel(10, "Mar 11, 2016");
+    data3.save();
+    PushUpModel data4 = new PushUpModel(25, "Mar 12, 2016");
+    data4.save();
+    PushUpModel data5 = new PushUpModel(30, "Mar 13, 2016");
+    data5.save();
+    PushUpModel data6 = new PushUpModel(20, "Mar 15, 2016");
+    data6.save();
+    PushUpModel data7 = new PushUpModel(27, "Mar 16, 2016");
+    data7.save();
+    PushUpModel data8 = new PushUpModel(13, "Mar 17, 2016");
+    data8.save();*/
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
     if (preferences.getBoolean("pushup_time", true)) {
