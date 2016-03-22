@@ -51,34 +51,33 @@ public class StatisticsFragment extends Fragment {
     lineChart = (LineChart) view.findViewById(R.id.linechart);
     pushuprecordMain = PushUpModel.fetchPushups();
 
-    dateSelector(5, spinnerDropdown);
+    dateSelector(5);
 
     spinnerDropdown.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
       @Override
       public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-        Log.i("Datar", "Position: "+ position +" Id: "+id);
-        /*switch (id) {
+        switch (position) {
           case 0:
-            dateSelector(5, spinnerDropdown);
+            dateSelector(5);
             break;
           case 1:
-            dateSelector(7, spinnerDropdown);
+            dateSelector(7);
             break;
           case 2:
-            dateSelector(14, spinnerDropdown);
+            dateSelector(14);
             break;
           case 3:
-            dateSelector(21, spinnerDropdown);
+            dateSelector(21);
             break;
           case 4:
-            dateSelector(30, spinnerDropdown);
+            dateSelector(30);
             break;
-        }*/
+        }
       }
     });
   }
 
-  private void dateSelector(int sizeToPlot, MaterialSpinner spinner) {
+  private void dateSelector(int sizeToPlot) {
     recordsSize = pushuprecordMain.size();
     LineDataSet dataset;
     if (recordsSize > 0) {
