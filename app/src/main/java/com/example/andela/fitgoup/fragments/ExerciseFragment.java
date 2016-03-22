@@ -264,10 +264,9 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
 
   private void startAlarm() {
     Intent intent = new Intent(getActivity().getApplicationContext(), AlarmBroadcast.class);
-    final PendingIntent pIntent = PendingIntent.getBroadcast(getContext(), AlarmBroadcast.NOTIFY_ID,
+    final PendingIntent pIntent = PendingIntent.getBroadcast(getContext(), 5,
         intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-    // The time to fire
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(System.currentTimeMillis());
     calendar.set(Calendar.SECOND, 0);
