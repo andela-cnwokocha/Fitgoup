@@ -1,19 +1,14 @@
 package com.example.andela.fitgoup.fragments;
 
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.DropBoxManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.beardedhen.androidbootstrap.BootstrapDropDown;
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.activities.HomeDashboard;
 import com.example.andela.fitgoup.model.PushUpModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -47,7 +42,7 @@ public class StatisticsFragment extends Fragment {
   public void onViewCreated(View view, Bundle savedInstance) {
     viewing = view;
     final MaterialSpinner spinnerDropdown = (MaterialSpinner) view.findViewById(R.id.mydropdown);
-    spinnerDropdown.setItems("Last 5 Days", "Last 7 Days", "Last 14 Days", "Last 21 Days", "Last 30 Days");
+    spinnerDropdown.setItems("5 Days", "7 Days", "14 Days", "21 Days", "30 Days");
     lineChart = (LineChart) view.findViewById(R.id.linechart);
     pushuprecordMain = PushUpModel.fetchPushups();
 
