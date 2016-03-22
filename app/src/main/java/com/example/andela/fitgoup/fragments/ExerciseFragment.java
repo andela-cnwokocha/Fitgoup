@@ -1,6 +1,5 @@
 package com.example.andela.fitgoup.fragments;
 
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -208,7 +207,6 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     return Integer.parseInt(pushups.getText().toString().trim());
   }
 
-
   @Override
   public void onSensorChanged(SensorEvent event) {
     startbutton.setText(R.string.stop_timer);
@@ -229,7 +227,6 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
 
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
   }
 
   @Override
@@ -273,9 +270,15 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     calendar.set(Calendar.MINUTE, getMinute());
     calendar.set(Calendar.HOUR_OF_DAY, getHour());
 
-    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-        AlarmManager.INTERVAL_DAY*preferences.getInt("pushup_day", 1), pIntent);
+    Calendar time = Calendar.getInstance();
+    time.setTimeInMillis(System.currentTimeMillis());
+    time.set(Calendar.HOUR_OF_DAY, getHour());
+    time.set(Calendar.MINUTE, getMinute());
+    if (System.currentTimeMillis() <= time.getTimeInMillis()) {
+      AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+      alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+          AlarmManager.INTERVAL_DAY * preferences.getInt("pushup_day", 1), pIntent);
+    }
   }
 
   private int getMinute() {

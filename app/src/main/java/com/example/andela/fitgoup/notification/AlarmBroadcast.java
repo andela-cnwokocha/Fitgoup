@@ -10,10 +10,10 @@ import android.preference.PreferenceManager;
  * Created by andela on 3/18/16.
  */
 public class AlarmBroadcast extends BroadcastReceiver {
-
+  SharedPreferences preferences;
   @Override
   public void onReceive(Context context, Intent intent) {
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
    if(preferences.getBoolean("pushup_time", true)) {
      Intent intends = new Intent(context, UserAlarmService.class);
