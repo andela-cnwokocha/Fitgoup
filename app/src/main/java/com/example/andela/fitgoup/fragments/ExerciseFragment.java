@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +53,8 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   private SharedPreferences preferences;
   private SensorManager mSensorManager;
   private Sensor mSensor;
+  private PendingIntent pendingIntent;
+  private AlarmManager alarmManager;
 
   public ExerciseFragment() {
   }
@@ -79,7 +80,8 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
 
     if (preferences.getBoolean("pushup_time", true)) {
       startAlarm();
-      Log.i("STRE", "Alarm set");
+    } else {
+      cancelService();
     }
 
     setTimerTextview();
@@ -261,7 +263,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
 
   private void startAlarm() {
     Intent intent = new Intent(getActivity().getApplicationContext(), AlarmBroadcast.class);
-    final PendingIntent pIntent = PendingIntent.getBroadcast(getContext(), 5,
+    pendingIntent = PendingIntent.getBroadcast(getContext(), 5,
         intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
     Calendar calendar = Calendar.getInstance();
@@ -275,9 +277,9 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     time.set(Calendar.HOUR_OF_DAY, getHour());
     time.set(Calendar.MINUTE, getMinute());
     if (System.currentTimeMillis() <= time.getTimeInMillis()) {
-      AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+      alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
       alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-          AlarmManager.INTERVAL_DAY * preferences.getInt("pushup_day", 1), pIntent);
+          AlarmManager.INTERVAL_DAY * preferences.getInt("pushup_day", 1), pendingIntent);
     }
   }
 
@@ -289,6 +291,12 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   private int getHour() {
     String val = preferences.getString("pushup_hour", "12:00");
     return Integer.parseInt(val.split(":")[0]);
+  }
+
+  private void cancelService() {
+    if (alarmManager != null) {
+      alarmManager.cancel(pendingIntent);
+    }
   }
 }
 

@@ -130,18 +130,4 @@ public class HomeDashboard extends AppCompatActivity {
       titles.add(fragmentTitle);
     }
   }
-  /*@Override
-  protected void onDestroy() {
-    super.onDestroy();
-
-    Calendar time = Calendar.getInstance();
-    int currentHour = time.get(Calendar.HOUR_OF_DAY);
-    int currentMin = time.get(Calendar.MINUTE);
-    if ((currentHour < getHour()) && (currentMin < getMinute())) {
-      SharedPreferences prefs = this.getSharedPreferences("alarm_time", MODE_PRIVATE);
-      SharedPreferences.Editor edit = prefs.edit();
-      edit.putInt("numberofalarm",1);
-      edit.apply();
-    }
-  }*/
 }

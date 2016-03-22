@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 /**
  * Created by andela on 3/18/16.
@@ -19,6 +20,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
      Intent intends = new Intent(context, UserAlarmService.class);
      context.startService(intends);
    } else {
+     Log.i("FRET", "Stop ser call");
      cancelService(context);
    }
   }
