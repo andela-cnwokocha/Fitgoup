@@ -22,16 +22,12 @@
         Push ups. There are two options for counting your push ups, this includes a countdown timer, or a
         sensor counter.
 
-        <b>Countdown Timer</b>
-
-        If this option is selected (default), when you start doing push ups, whe the time you select reaches,
-        you\'ll be prompted to enter the number of push ups you recorded within the specified time,
-        this value is saved so you can view later on.
-
-        <b>Sensor Counter</b>
-
-        With this option, you set the minimum number of push ups you can record in your settings.
+        If Countdown Timer option is selected (default), when the time you select reaches,
+        you\'ll be prompted to enter the number of push ups you recorded within the specified time.
+        This value is saved so you can view later on. For Sensor Counter, you set the minimum number of push ups you can record in your settings.
         When you click the start button, you have to place your just beneath your head, and as you push up
-        your push ups is counted and saved when you reach the specified amount of pushups."</string>
-    <string name="skip_tutorial">You\'ve skipping this tutorial</string>
+        your push ups is counted and saved when you reach the specified amount of pushups.
+
+        "</string>
+    <string name="skip_tutorial">You\'ve skipped the tutorial</string>
 </resources>

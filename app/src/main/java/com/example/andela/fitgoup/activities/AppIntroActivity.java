@@ -14,10 +14,10 @@ public class AppIntroActivity extends AppIntro {
   @Override
   public void init(Bundle savedInstanceState) {
     addSlide(AppIntroFragment.newInstance("PushFit", getString(R.string.pushfit_slide1_description),
-        R.drawable.ic_calendar, Color.parseColor("#607D8B")));
+        R.mipmap.i_pushup_slide, Color.parseColor("#607D8B")));
 
     addSlide(AppIntroFragment.newInstance("How to use", getString(R.string.appintro_slide2_howtouse),
-        R.drawable.ic_calendar, Color.parseColor("#607D8B")));
+        R.drawable.i_pushup_slide, Color.parseColor("#607D8B")));
 
     setBarColor(Color.parseColor("#000000"));
     setSeparatorColor(Color.parseColor("#B6B6B6"));
