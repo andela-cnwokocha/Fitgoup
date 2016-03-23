@@ -1,6 +1,7 @@
 package com.example.andela.fitgoup.activities;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,7 +17,6 @@ import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.fragments.CalendarFragment;
 import com.example.andela.fitgoup.fragments.ExerciseFragment;
-import com.example.andela.fitgoup.fragments.InfoFragment;
 import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.StatisticsFragment;
 
@@ -27,9 +27,8 @@ public class HomeDashboard extends AppCompatActivity {
   private ViewPager mViewPager;
   private TabLayout tabs;
   private int[] tabIcons = {R.drawable.ic_fitness_center,
-      R.drawable.ic_help_outline,
-      R.drawable.ic_settings_white,
       R.drawable.ic_show_chart,
+      R.drawable.ic_settings_white,
       R.drawable.ic_calendar};
   private SharedPreferences preferences;
 
@@ -38,6 +37,24 @@ public class HomeDashboard extends AppCompatActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    Thread t = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        SharedPreferences getPrefs = PreferenceManager
+            .getDefaultSharedPreferences(getBaseContext());
+        boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+        if (isFirstStart) {
+          Intent i = new Intent(HomeDashboard.this, AppIntroActivity.class);
+          startActivity(i);
+          SharedPreferences.Editor e = getPrefs.edit();
+          e.putBoolean("firstStart", false);
+          e.apply();
+        }
+      }
+    });
+    t.start();
+
     TypefaceProvider.registerDefaultIconSets();
     setContentView(R.layout.activity_home_dashboard);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,7 +96,6 @@ public class HomeDashboard extends AppCompatActivity {
       tabs.getTabAt(1).setIcon(tabIcons[1]);
       tabs.getTabAt(2).setIcon(tabIcons[2]);
       tabs.getTabAt(3).setIcon(tabIcons[3]);
-      tabs.getTabAt(4).setIcon(tabIcons[4]);
     } catch (NullPointerException npe) {
       npe.getCause().printStackTrace();
     }
@@ -88,9 +104,8 @@ public class HomeDashboard extends AppCompatActivity {
   public void setUpPager(ViewPager viewPager) {
     SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
     adapter.addPageFragment(new ExerciseFragment(), "Exercise");
-    adapter.addPageFragment(new InfoFragment(), "Info");
-    adapter.addPageFragment(new SettingsFragment(), "Settings");
     adapter.addPageFragment(new StatisticsFragment(), "Statistics");
+    adapter.addPageFragment(new SettingsFragment(), "Settings");
     adapter.addPageFragment(new CalendarFragment(), "Calendar");
     viewPager.setAdapter(adapter);
     viewPager.setOffscreenPageLimit(1);
