@@ -88,7 +88,7 @@ public class HomeDashboard extends AppCompatActivity {
     adapter.addPageFragment(new StatisticsFragment(), "Statistics");
     adapter.addPageFragment(new SettingsFragment(), "Settings");
     viewPager.setAdapter(adapter);
-    viewPager.setOffscreenPageLimit(1);
+    viewPager.setOffscreenPageLimit(3);
     viewPager.getAdapter().notifyDataSetChanged();
   }
 
