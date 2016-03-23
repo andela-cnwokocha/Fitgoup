@@ -27,9 +27,9 @@ public class HomeDashboard extends AppCompatActivity {
   private ViewPager mViewPager;
   private TabLayout tabs;
   private int[] tabIcons = {R.drawable.ic_fitness_center,
+      R.drawable.ic_calendar,
       R.drawable.ic_show_chart,
-      R.drawable.ic_settings_white,
-      R.drawable.ic_calendar};
+      R.drawable.ic_settings_white};
   private SharedPreferences preferences;
 
   public HomeDashboard() {}
@@ -64,29 +64,8 @@ public class HomeDashboard extends AppCompatActivity {
     setUpPager(mViewPager);
     tabs = (TabLayout) findViewById(R.id.tabs);
     tabs.setupWithViewPager(mViewPager);
-
     setTabIcons();
 
-    /*PushUpModel.clearData();*/
-
-    /*PushUpModel data9 = new PushUpModel(32, "Mar 8, 2016");
-    data9.save();
-    PushUpModel data1 = new PushUpModel(16, "Mar 9, 2016");
-    data1.save();
-    PushUpModel data2 = new PushUpModel(20, "Mar 10, 2016");
-    data2.save();
-    PushUpModel data3 = new PushUpModel(10, "Mar 11, 2016");
-    data3.save();
-    PushUpModel data4 = new PushUpModel(25, "Mar 12, 2016");
-    data4.save();
-    PushUpModel data5 = new PushUpModel(30, "Mar 13, 2016");
-    data5.save();
-    PushUpModel data6 = new PushUpModel(20, "Mar 15, 2016");
-    data6.save();
-    PushUpModel data7 = new PushUpModel(27, "Mar 16, 2016");
-    data7.save();
-    PushUpModel data8 = new PushUpModel(13, "Mar 17, 2016");
-    data8.save();*/
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
   }
 
@@ -96,6 +75,7 @@ public class HomeDashboard extends AppCompatActivity {
       tabs.getTabAt(1).setIcon(tabIcons[1]);
       tabs.getTabAt(2).setIcon(tabIcons[2]);
       tabs.getTabAt(3).setIcon(tabIcons[3]);
+
     } catch (NullPointerException npe) {
       npe.getCause().printStackTrace();
     }
@@ -104,9 +84,9 @@ public class HomeDashboard extends AppCompatActivity {
   public void setUpPager(ViewPager viewPager) {
     SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
     adapter.addPageFragment(new ExerciseFragment(), "Exercise");
+    adapter.addPageFragment(new CalendarFragment(), "Calendar");
     adapter.addPageFragment(new StatisticsFragment(), "Statistics");
     adapter.addPageFragment(new SettingsFragment(), "Settings");
-    adapter.addPageFragment(new CalendarFragment(), "Calendar");
     viewPager.setAdapter(adapter);
     viewPager.setOffscreenPageLimit(1);
     viewPager.getAdapter().notifyDataSetChanged();
