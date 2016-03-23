@@ -6,6 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.andela.fitgoup"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -28,6 +29,21 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile 'org.apache.maven:maven-ant-tasks:2.1.3'
+    testCompile "org.robolectric:shadows-support-v4:3.0"
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test:runner:0.3') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
+        exclude group: 'javax.inject'
+        exclude group: 'com.android.support'
+    }
+
+
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
     compile 'com.android.support:support-v4:23.2.0'

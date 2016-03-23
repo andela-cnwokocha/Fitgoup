@@ -10,16 +10,15 @@
     android:padding="@dimen/bootstrap_h1_vert_padding"
     tools:context="com.example.andela.fitgoup.activities.HomeDashboard$PlaceholderFragment">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/timer_field"
-            android:textSize="40sp"
-            android:layout_weight="1.5"
-            android:paddingBottom="50dp"
-            android:layout_gravity="center_vertical|center_horizontal"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/timer_field"
+        android:textSize="40sp"
+        android:layout_weight="1.5"
+        android:paddingBottom="50dp"
+        android:layout_gravity="center_vertical|center_horizontal"/>
 
     <TextView
         android:id="@+id/fragment_exercise"

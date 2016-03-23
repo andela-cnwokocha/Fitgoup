@@ -1,7 +1,7 @@
 # PushFit
 
 
-PushFit is a simple push-up training android application. PushFit lets you record pushups. PushFit lets you plan when you will like to do push ups, and reminds you when it is time. You can view your recorded push up progress on a chart, or the days when you did push ups later on. 
+PushFit is a simple push-up training android application. PushFit lets you plan when you will like to do push ups, and reminds you when it is time. You can view your recorded push up progress on a chart, or the days when you did push ups later on. 
 
 
 ##Features
@@ -29,7 +29,7 @@ You are welcome to contribute to this application
 
 ####Dependences
 
-They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/build.gradle):
+They're all listed in the [https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle):
 
 
 ##License
