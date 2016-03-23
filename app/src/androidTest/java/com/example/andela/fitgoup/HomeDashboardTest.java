@@ -26,14 +26,26 @@ public class HomeDashboardTest {
         .check(matches(isDisplayed()));
     onView(withText("SKIP"))
         .perform(click());
-    onView(withText("0"))
+    onView(withText("00:05:00"))
         .check(matches(isDisplayed()));
     onView(withText("Start"))
         .check(matches(isDisplayed()));
     onView(withText("Start"))
         .perform(click());
-    /*onView(withText("Stop"))
-        .check(matches(isDisplayed()));*/
+    onView(withText("Stop"))
+        .check(matches(isDisplayed()));
+    onView(withText("Stop"))
+        .perform(click());
+    onView(withText("Settings"))
+        .check(matches(isDisplayed()));
+    onView(withText("Settings"))
+        .perform(click());
+    onView(withText("Push-ups Countdown"))
+        .perform(click());
+    onView(withText("Exercise"))
+        .perform(click());
+    onView(withText("0"))
+        .check(matches(isDisplayed()));
   }
 
 

@@ -150,7 +150,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
 
   private void setCountOptions() {
     preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-    timeroption = preferences.getBoolean("timer_switch", false);
+    timeroption = preferences.getBoolean("timer_switch", true);
     countdownoption = preferences.getBoolean("pushup_switch", false);
     timerCount = preferences.getInt("time_count", 5);
     countDownCount = preferences.getInt("push_count", 10);
