@@ -5,7 +5,6 @@
              tools:context="layout.BlankFragment"
              android:animateLayoutChanges="true">
 
-    <!-- TODO: Update blank fragment layout -->
     <FrameLayout
         android:id="@+id/preference_area"
         android:layout_width="match_parent"
