@@ -235,10 +235,6 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   public void onResume() {
     super.onResume();
     mSensorManager.unregisterListener(this);
-    View vg = getView().findViewById(R.id.exercise_fragment);
-    vg.invalidate();
-    setCountOptions();
-    setTimerTextview();
   }
 
   @Override
