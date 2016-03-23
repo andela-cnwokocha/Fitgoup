@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeDashboard extends AppCompatActivity {
-  private ViewPager mViewPager;
+  private ViewPager mHomeViewPager;
   private TabLayout tabs;
   private int[] tabIcons = {R.drawable.ic_fitness_center,
       R.drawable.ic_calendar,
@@ -60,10 +60,10 @@ public class HomeDashboard extends AppCompatActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setTitle("PushFit");
     setSupportActionBar(toolbar);
-    mViewPager = (ViewPager) findViewById(R.id.container);
-    setUpPager(mViewPager);
+    mHomeViewPager = (ViewPager) findViewById(R.id.container);
+    setUpPager(mHomeViewPager);
     tabs = (TabLayout) findViewById(R.id.tabs);
-    tabs.setupWithViewPager(mViewPager);
+    tabs.setupWithViewPager(mHomeViewPager);
     setTabIcons();
 
     preferences = PreferenceManager.getDefaultSharedPreferences(this);
