@@ -77,14 +77,13 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     saveButton = (Button) view.findViewById(R.id.save_button);
     timerview = (TextView) view.findViewById(R.id.timer_field);
     setCountOptions();
+    setTimerTextview();
 
     if (preferences.getBoolean("pushup_time", true)) {
       startAlarm();
     } else {
       cancelService();
     }
-
-    setTimerTextview();
     mSensorManager = (SensorManager) getActivity().getSystemService(getActivity().SENSOR_SERVICE);
     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 

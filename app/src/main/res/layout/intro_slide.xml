@@ -14,6 +14,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:paddingLeft="32dp"
+        android:id="@+id/intro1_main_text"
         android:layout_weight="3"
         android:fontFamily="sans-serif-thin"
         android:textColor="@color/colorPrimaryText"
