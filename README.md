@@ -16,7 +16,7 @@ The following functions are implemented:
 
 ## Screenshots
 
-
+![Screen 1](/assets/Screenshot_2016-03-23-09-10-134.jpeg?raw=true "Optional Title")
 
 ##### Contributions
 You are welcome to contribute to this application
@@ -25,7 +25,6 @@ You are welcome to contribute to this application
 
 They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/build.gradle):
 
-![Screen 1](/assets/Screenshot_2016-03-23-09-10-134.jpeg?raw=true "Optional Title")
 
 ##License
 
