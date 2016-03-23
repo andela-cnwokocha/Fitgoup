@@ -1,7 +1,11 @@
 package com.example.andela.fitgoup;
 
 import android.os.Build;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.widget.TextView;
 
 import com.example.andela.fitgoup.activities.HomeDashboard;
 import com.example.andela.fitgoup.fragments.CalendarFragment;
@@ -9,12 +13,15 @@ import com.example.andela.fitgoup.fragments.ExerciseFragment;
 import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.StatisticsFragment;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
@@ -29,6 +36,7 @@ import static junit.framework.Assert.assertTrue;
 public class StartScreenTest {
   private HomeDashboard homeDashboard;
   private ViewPager viewPager;
+  private TabLayout tabLayout;
   private CalendarFragment calendarFragment;
   private SettingsFragment settingsFragment;
   private StatisticsFragment statisticsFragment;
@@ -38,34 +46,8 @@ public class StartScreenTest {
   public void setUp() {
     homeDashboard = Robolectric.setupActivity(HomeDashboard.class);
     viewPager = (ViewPager) homeDashboard.getWindow().findViewById(R.id.container);
+    tabLayout = (TabLayout) homeDashboard.getWindow().findViewById(R.id.tabs);
   }
-
-  /**
-   *  The fllowing are things to test with robolectric
-   *  1. Is my title correctly displayed
-   *  2. Do I have the correct number of tabs - 4
-   *  3. Test that the tests has the correct title names
-   *  4. Test that the icons are correct
-   *
-   *  On the first fragment (exercise),
-   *  - test that the textview is correct when it is created newly,
-   *  - test that the button has the right text
-   *  - test what happens when the button is clicked
-   *  - test that darwable items are not null, and have the right text
-   *
-   *  On the second fragment (Calendar)
-   *  Test that the calendar is in view
-   *
-   *  On the third fragment
-   *   - test that no data is shown when it is created
-   *   - Supply data to the database
-   *   - test that the no data text isn't visible again
-   *   - test that the no data text is the right text
-   *
-   *   On the settings fragment
-   *   - test that there are the right text
-   *   - change options
-   * */
 
   @Test
   public void validateTitle() {
@@ -73,24 +55,64 @@ public class StartScreenTest {
   }
 
   @Test
-  public void validNumberOfTabs() {
+  public void testPagerProperties() {
     assertNotNull(viewPager);
+    assertNotNull(tabLayout);
+
+    assertTrue(tabLayout.getTabCount() == 4);
+
   }
 
-  /*@Test
-  public void testFirstFragment() {
-    viewPager.setCurrentItem(0);
+  @Test
+  public void exerciseFragmentTest() {
+    ExerciseFragment exerciseFragment = new ExerciseFragment();
+    FragmentManager fragmentManager = homeDashboard.getSupportFragmentManager();
+    fragmentManager.beginTransaction().add(exerciseFragment, "EXERCISE").commit();
+    homeDashboard.getSupportFragmentManager().executePendingTransactions();
 
-    Fragment exerciseFragment =
-        homeDashboard.getSupportFragmentManager().findFragmentById(R.id.exercise_fragment);
+    Assert.assertThat(exerciseFragment, CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(exerciseFragment.getView(), CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(FragmentActivity.class));
+    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(HomeDashboard.class));
 
-    assertNotNull(exerciseFragment);
-    *//*FragmentManager fragmentManager = homeDashboard.getSupportFragmentManager();
-    fragmentManager.beginTransaction().add(exerciseFragment, null).commit();
-    homeDashboard.getSupportFragmentManager().executePendingTransactions();*//*
+    TextView timerview = (TextView) homeDashboard.findViewById(R.id.timer_field);
+    assertTrue(timerview.getText().equals("0"));
+    TextView buttonText = (TextView) homeDashboard.findViewById(R.id.fragment_exercise);
+    assertTrue(buttonText.getText().equals("Start"));
 
-    //assertNotNull(exerciseFragment);
-  }*/
+    assertTrue(tabLayout.getTabAt(0).getText().equals("Exercise"));
+  }
 
+  @Test
+  public void calendarFragmentTest() {
+    CalendarFragment calendarFragment = new CalendarFragment();
+    SupportFragmentTestUtil.startFragment(calendarFragment);
+    assertNotNull(calendarFragment);
+
+  }
+
+  @Test
+  public void settingsFragmentTest() {
+    SettingsFragment settingsFragment = new SettingsFragment();
+    FragmentManager fragmentManager = homeDashboard.getSupportFragmentManager();
+    fragmentManager.beginTransaction().add(settingsFragment, "Settings").commit();
+    homeDashboard.getSupportFragmentManager().executePendingTransactions();
+
+    Assert.assertThat(settingsFragment, CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(settingsFragment.getView(), CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(settingsFragment.getActivity(), CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(settingsFragment.getActivity(), CoreMatchers.instanceOf(FragmentActivity.class));
+    Assert.assertThat(settingsFragment.getActivity(), CoreMatchers.instanceOf(HomeDashboard.class));
+
+    assertTrue(tabLayout.getTabAt(3).getText().equals("Settings"));
+  }
+
+  @Test
+  public void statisticsFragmentTest() {
+    StatisticsFragment statisticsFragment = new StatisticsFragment();
+    SupportFragmentTestUtil.startFragment(statisticsFragment);
+    assertNotNull(statisticsFragment);
+  }
 
 }
