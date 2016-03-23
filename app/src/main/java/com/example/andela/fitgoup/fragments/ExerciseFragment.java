@@ -114,6 +114,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
           startbutton.setText(R.string.start_timer);
           recordLayout.setVisibility(View.INVISIBLE);
           counter = 0;
+          setTimerTextview();
         }
       }
     });
