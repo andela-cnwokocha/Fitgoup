@@ -46,11 +46,9 @@ public class HomeDashboardTest {
         .perform(click());
     onView(withText("0"))
         .check(matches(isDisplayed()));
+    onView(withText("Statistics"))
+        .check(matches(isDisplayed()));
+    onView(withText("Statistics"))
+        .perform(click());
   }
-
-
-
-
-
-
 }
