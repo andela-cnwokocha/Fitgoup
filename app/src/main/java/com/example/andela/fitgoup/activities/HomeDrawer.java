@@ -2,6 +2,7 @@ package com.example.andela.fitgoup.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,10 +13,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.andela.fitgoup.R;
+import com.example.andela.fitgoup.fragments.CalendarFragment;
 import com.example.andela.fitgoup.fragments.ExerciseFragment;
+import com.example.andela.fitgoup.fragments.SettingsFragment;
+import com.example.andela.fitgoup.fragments.StatisticsFragment;
 
 public class HomeDrawer extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
+  private FragmentTransaction ft;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,7 @@ public class HomeDrawer extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft = getSupportFragmentManager().beginTransaction();
     ft.replace(R.id.dfragment_exercise, new ExerciseFragment()).commit();
   }
 
@@ -50,23 +55,16 @@ public class HomeDrawer extends AppCompatActivity
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.home_drawer, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
     int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
       return true;
     }
-
     return super.onOptionsItemSelected(item);
   }
 
@@ -74,10 +72,29 @@ public class HomeDrawer extends AppCompatActivity
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     int id = item.getItemId();
-
-
+    switch (id) {
+      case R.id.push_up:
+        setFragment(new ExerciseFragment());
+        break;
+      case R.id.stats:
+        setFragment(new StatisticsFragment());
+        break;
+      case R.id.calendar:
+        setFragment(new CalendarFragment());
+        break;
+      case R.id.settings:
+        setFragment(new SettingsFragment());
+        break;
+    }
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  private void setFragment(Fragment fragment) {
+    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+    fragmentTransaction.replace(R.id.dfragment_exercise, fragment);
+    fragmentTransaction.addToBackStack(null);
+    fragmentTransaction.commit();
   }
 }

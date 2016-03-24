@@ -22,11 +22,18 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<include layout="@layout/content_home_drawer"/>-->
-    <FrameLayout
-        android:id="@+id/dfragment_exercise"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@+id/dfragment_exercise"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
