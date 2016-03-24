@@ -29,7 +29,7 @@ You are welcome to contribute to this application
 
 ####Dependences
 
-They're all listed in the [https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle):
+They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle):
 
 
 ##License
