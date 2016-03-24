@@ -77,7 +77,7 @@ public class StartScreenTest {
     Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(HomeDashboard.class));
 
     TextView timerview = (TextView) homeDashboard.findViewById(R.id.timer_field);
-    assertTrue(timerview.getText().equals("0"));
+    assertTrue(timerview.getText().equals("00:05:00"));
     TextView buttonText = (TextView) homeDashboard.findViewById(R.id.fragment_exercise);
     assertTrue(buttonText.getText().equals("Start"));
 
