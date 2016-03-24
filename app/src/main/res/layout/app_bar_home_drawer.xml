@@ -22,6 +22,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_home_drawer"/>
+    <!--<include layout="@layout/content_home_drawer"/>-->
+    <FrameLayout
+        android:id="@+id/dfragment_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
