@@ -45,9 +45,7 @@ public class StatisticsFragment extends Fragment {
     spinnerDropdown.setItems("5 Days", "7 Days", "14 Days", "21 Days", "30 Days");
     lineChart = (LineChart) view.findViewById(R.id.linechart);
     pushuprecordMain = PushUpModel.fetchPushups();
-
     dateSelector(5);
-
     spinnerDropdown.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
       @Override
       public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
