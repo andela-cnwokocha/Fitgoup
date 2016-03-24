@@ -20,6 +20,7 @@ public class SettingActivity extends AppCompatActivity {
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
     setSupportActionBar(toolbar);
+    setTitle("Settings");
     toolbar.setNavigationIcon(R.drawable.left);
     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
@@ -37,6 +38,4 @@ public class SettingActivity extends AppCompatActivity {
     Intent homeIntent = new Intent(this, HomeDrawer.class);
     startActivity(homeIntent);
   }
-
-
 }

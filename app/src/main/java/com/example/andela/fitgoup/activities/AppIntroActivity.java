@@ -47,7 +47,7 @@ public class AppIntroActivity extends AppIntro {
   }
 
   private void loadActivity() {
-    Intent homedashboard = new Intent(this, HomeDashboard.class);
+    Intent homedashboard = new Intent(this, HomeDrawer.class);
     startActivity(homedashboard);
   }
 }

@@ -1,7 +1,9 @@
 package com.example.andela.fitgoup.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +27,23 @@ public class HomeDrawer extends AppCompatActivity
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Thread t = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        SharedPreferences getPrefs = PreferenceManager
+            .getDefaultSharedPreferences(getBaseContext());
+        boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+        if (isFirstStart) {
+          Intent i = new Intent(HomeDrawer.this, AppIntroActivity.class);
+          startActivity(i);
+          SharedPreferences.Editor e = getPrefs.edit();
+          e.putBoolean("firstStart", false);
+          e.apply();
+        }
+      }
+    });
+    t.start();
+
     setContentView(R.layout.activity_home_drawer);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -91,6 +110,8 @@ public class HomeDrawer extends AppCompatActivity
     return true;
   }
 
+
+
   private void setFragment(Fragment fragment) {
     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
     fragmentTransaction.replace(R.id.dfragment_exercise, fragment);
@@ -102,4 +123,5 @@ public class HomeDrawer extends AppCompatActivity
     Intent settingIntent = new Intent(this, SettingActivity.class);
     startActivity(settingIntent);
   }
+
 }
