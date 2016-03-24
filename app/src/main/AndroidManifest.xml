@@ -22,7 +22,6 @@
             android:label="@string/title_activity_home_dashboard"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
 
         <receiver android:name=".notification.AlarmResetter">
@@ -44,13 +43,13 @@
             android:name=".activities.HomeDrawer"
             android:label="@string/title_activity_home_drawer"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
+        </activity>
+        <activity android:name=".activities.SettingActivity">
         </activity>
     </application>
 

@@ -1,5 +1,6 @@
 package com.example.andela.fitgoup.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,6 @@ import android.view.MenuItem;
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.fragments.CalendarFragment;
 import com.example.andela.fitgoup.fragments.ExerciseFragment;
-import com.example.andela.fitgoup.fragments.SettingsFragment;
 import com.example.andela.fitgoup.fragments.StatisticsFragment;
 
 public class HomeDrawer extends AppCompatActivity
@@ -28,7 +28,6 @@ public class HomeDrawer extends AppCompatActivity
     setContentView(R.layout.activity_home_drawer);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,6 +62,7 @@ public class HomeDrawer extends AppCompatActivity
   public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
     if (id == R.id.action_settings) {
+      startSetting();
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -83,7 +83,7 @@ public class HomeDrawer extends AppCompatActivity
         setFragment(new CalendarFragment());
         break;
       case R.id.settings:
-        setFragment(new SettingsFragment());
+        startSetting();
         break;
     }
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,5 +96,10 @@ public class HomeDrawer extends AppCompatActivity
     fragmentTransaction.replace(R.id.dfragment_exercise, fragment);
     fragmentTransaction.addToBackStack(null);
     fragmentTransaction.commit();
+  }
+
+  private void startSetting() {
+    Intent settingIntent = new Intent(this, SettingActivity.class);
+    startActivity(settingIntent);
   }
 }

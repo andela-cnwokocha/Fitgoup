@@ -2,7 +2,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:name="com.example.andela.fitgoup.fragments.SettingsFragment">
+    android:name="com.example.andela.fitgoup.fragments.SettingsFragment"
+    android:layout_marginTop="?attr/actionBarSize">
 
     <PreferenceCategory
         android:title="Select Pushups option"
