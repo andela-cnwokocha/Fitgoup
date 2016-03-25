@@ -40,6 +40,7 @@ public class StatisticsFragment extends Fragment {
   @Override
   public void onViewCreated(View view, Bundle savedInstance) {
     viewing = view;
+    getActivity().setTitle("Reports");
     final MaterialSpinner spinnerDropdown = (MaterialSpinner) view.findViewById(R.id.mydropdown);
     spinnerDropdown.setItems("5 Days", "7 Days", "14 Days", "21 Days", "30 Days");
     lineChart = (LineChart) view.findViewById(R.id.linechart);

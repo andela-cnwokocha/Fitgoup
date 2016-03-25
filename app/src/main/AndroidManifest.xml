@@ -16,14 +16,6 @@
             android:name="AA_DB_VERSION"
             android:value="4"/>
 
-        <activity
-            android:name=".activities.HomeDashboard"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_home_dashboard"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
         <receiver android:name=".notification.AlarmResetter">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>

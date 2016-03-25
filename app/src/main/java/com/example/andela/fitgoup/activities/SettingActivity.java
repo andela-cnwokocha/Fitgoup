@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.andela.fitgoup.R;
@@ -34,8 +35,16 @@ public class SettingActivity extends AppCompatActivity {
   }
 
   @Override
-  public void onBackPressed() {
-    Intent homeIntent = new Intent(this, HomeDrawer.class);
-    startActivity(homeIntent);
+  public boolean onOptionsItemSelected(MenuItem item) {
+      if (item.getItemId() == android.R.id.home){
+          finish();
+      }
+    return super.onOptionsItemSelected(item);
   }
+
+  @Override
+  public void onBackPressed() {
+    finish();
+  }
+
 }

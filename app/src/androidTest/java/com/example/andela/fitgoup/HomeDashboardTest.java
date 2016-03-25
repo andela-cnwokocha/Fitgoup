@@ -2,8 +2,6 @@ package com.example.andela.fitgoup;
 
 import android.support.test.rule.ActivityTestRule;
 
-import com.example.andela.fitgoup.activities.HomeDashboard;
-
 import org.junit.Rule;
 import org.junit.Test;
 

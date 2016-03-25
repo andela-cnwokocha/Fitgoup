@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.activities.HomeDashboard;
+import com.example.andela.fitgoup.activities.HomeDrawer;
 
 
 /**
@@ -29,11 +29,11 @@ public class UserAlarmService extends IntentService {
 
   @Override
   protected void onHandleIntent(Intent intent) {
-    Intent intent1 = new Intent(this, HomeDashboard.class);
+    Intent intent1 = new Intent(this, HomeDrawer.class);
 
     nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
-    taskStackBuilder.addParentStack(HomeDashboard.class);
+    taskStackBuilder.addParentStack(HomeDrawer.class);
     taskStackBuilder.addNextIntent(intent1);
     PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 

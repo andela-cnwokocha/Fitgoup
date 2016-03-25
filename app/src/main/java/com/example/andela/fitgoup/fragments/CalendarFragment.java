@@ -48,7 +48,6 @@ public class CalendarFragment extends Fragment {
 
     @Override
     public void clear() {
-
     }
 
     @Override
@@ -116,6 +115,7 @@ public class CalendarFragment extends Fragment {
 
   @Override
   public void onViewCreated(View view, Bundle savedInstance) {
+    getActivity().setTitle("PushFit");
     MaterialCalendarView calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
     calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_NONE);
     pushUpModels = PushUpModel.fetchPushups();

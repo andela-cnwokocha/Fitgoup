@@ -12,8 +12,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.andela.fitgoup.R;
 import com.example.andela.fitgoup.fragments.CalendarFragment;
@@ -23,6 +25,7 @@ import com.example.andela.fitgoup.fragments.StatisticsFragment;
 public class HomeDrawer extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
   private FragmentTransaction ft;
+  private SharedPreferences preferences;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class HomeDrawer extends AppCompatActivity
     });
     t.start();
 
+    preferences = PreferenceManager.getDefaultSharedPreferences(this);
     setContentView(R.layout.activity_home_drawer);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -67,7 +71,12 @@ public class HomeDrawer extends AppCompatActivity
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
     } else {
-      super.onBackPressed();
+      finish();
+       /*if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
+        getSupportFragmentManager().popBackStack();
+      } else {
+
+      }*/
     }
   }
 
@@ -121,7 +130,17 @@ public class HomeDrawer extends AppCompatActivity
 
   private void startSetting() {
     Intent settingIntent = new Intent(this, SettingActivity.class);
-    startActivity(settingIntent);
+    startActivityForResult(settingIntent, 0);
   }
 
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if(requestCode == 0) {
+      ExerciseFragment fragment = (ExerciseFragment) getSupportFragmentManager()
+              .getFragments().get(0);
+      fragment.updateComponents();
+
+    }
+  }
 }

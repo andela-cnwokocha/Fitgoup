@@ -113,5 +113,4 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     timer.setSummary(String.valueOf(sharedPreferences.getBoolean("timer_switch", false)));
     countdown.setSummary(String.valueOf(sharedPreferences.getBoolean("pushup_switch", false)));
   }
-
 }

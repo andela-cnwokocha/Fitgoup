@@ -18,13 +18,12 @@
         android:visibility="gone"
         android:id="@+id/noNoteLayout"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/noNote_text"
-            android:textSize="20sp"
-            android:paddingBottom="30dp"/>
+            android:text="No Push up data yet"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
