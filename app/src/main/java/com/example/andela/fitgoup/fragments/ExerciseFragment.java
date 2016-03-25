@@ -111,14 +111,8 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     pushups = (TextView) view.findViewById(R.id.time_state);
     mSensorManager = (SensorManager) getActivity().getSystemService(getActivity().SENSOR_SERVICE);
     mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-
     updateComponents();
-
-    if (preferences.getBoolean("pushup_time", true)) {
-      startAlarm();
-    } else {
-      cancelService();
-    }
+    setAlarmService();
 
     startbutton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -162,7 +156,6 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     countdownoption = preferences.getBoolean("pushup_switch", false);
     timerCount = preferences.getInt("time_count", 5);
     countDownCount = preferences.getInt("push_count", 10);
-
   }
 
   private void setTimerTextview() {
@@ -301,6 +294,14 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
     main.addCategory(Intent.CATEGORY_HOME);
     main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(main);
+  }
+
+  public void setAlarmService(){
+    if (preferences.getBoolean("pushup_time", true)) {
+      startAlarm();
+    } else {
+      cancelService();
+    }
   }
 }
 

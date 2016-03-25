@@ -31,17 +31,16 @@ public class UserAlarmService extends IntentService {
   protected void onHandleIntent(Intent intent) {
     Intent intent1 = new Intent(this, HomeDrawer.class);
 
+    PendingIntent contentIntent = PendingIntent.getActivity(this,
+            0, intent1,
+            PendingIntent.FLAG_CANCEL_CURRENT);
     nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-    TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
-    taskStackBuilder.addParentStack(HomeDrawer.class);
-    taskStackBuilder.addNextIntent(intent1);
-    PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
     Notification notification = new NotificationCompat.Builder(this)
         .setContentTitle("Push ups time!")
         .setContentText("It is time to do Push ups")
         .setSmallIcon(R.drawable.ic_fitness_center)
-        .setContentIntent(pendingIntent)
+        .setContentIntent(contentIntent)
         .setDefaults(NotificationCompat.DEFAULT_SOUND)
         .setAutoCancel(true)
         .build();

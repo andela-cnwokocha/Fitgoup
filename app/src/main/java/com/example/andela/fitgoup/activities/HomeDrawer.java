@@ -72,11 +72,6 @@ public class HomeDrawer extends AppCompatActivity
       drawer.closeDrawer(GravityCompat.START);
     } else {
       finish();
-       /*if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
-        getSupportFragmentManager().popBackStack();
-      } else {
-
-      }*/
     }
   }
 
@@ -119,8 +114,6 @@ public class HomeDrawer extends AppCompatActivity
     return true;
   }
 
-
-
   private void setFragment(Fragment fragment) {
     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
     fragmentTransaction.replace(R.id.dfragment_exercise, fragment);
@@ -140,7 +133,7 @@ public class HomeDrawer extends AppCompatActivity
       ExerciseFragment fragment = (ExerciseFragment) getSupportFragmentManager()
               .getFragments().get(0);
       fragment.updateComponents();
-
+      fragment.setAlarmService();
     }
   }
 }
