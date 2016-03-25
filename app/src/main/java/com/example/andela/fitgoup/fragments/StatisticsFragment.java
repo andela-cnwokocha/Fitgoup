@@ -27,7 +27,6 @@ public class StatisticsFragment extends Fragment {
   private int recordsSize;
   private LineChart lineChart;
 
-
   public StatisticsFragment() {
   }
 

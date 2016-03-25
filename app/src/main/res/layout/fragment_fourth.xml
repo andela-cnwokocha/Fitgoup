@@ -1,11 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@color/icons"
-             tools:context=".fragments.StatisticsFragment"
-             android:animateLayoutChanges="true">
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/icons"
+    android:animateLayoutChanges="true"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:padding="@dimen/bootstrap_h1_vert_padding"
+    tools:context=".fragments.StatisticsFragment">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingTop="@dimen/appbar_padding_top"
         android:padding="@dimen/bootstrap_h1_vert_padding">
 
         <LinearLayout
@@ -46,8 +51,7 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/linechart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"/>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

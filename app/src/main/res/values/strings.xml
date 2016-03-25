@@ -28,4 +28,8 @@
         saved when you reach the specified amount of pushups.
         "</string>
     <string name="skip_tutorial">You\'ve skipped the tutorial</string>
+    <string name="title_activity_home_drawer">PushFit</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
