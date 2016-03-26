@@ -9,7 +9,7 @@
     android:animateLayoutChanges="true"
     android:layout_marginTop="?attr/actionBarSize"
     android:padding="@dimen/bootstrap_h1_vert_padding"
-    tools:context=".fragments.StatisticsFragment">
+    tools:context="checkpoint.project.andela.pushfit.fragments.StatisticsFragment">
 
     <LinearLayout
         android:layout_width="fill_parent"

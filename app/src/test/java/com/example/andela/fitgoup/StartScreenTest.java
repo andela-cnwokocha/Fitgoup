@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
-import com.example.andela.fitgoup.fragments.CalendarFragment;
-import com.example.andela.fitgoup.fragments.ExerciseFragment;
-import com.example.andela.fitgoup.fragments.SettingsFragment;
-import com.example.andela.fitgoup.fragments.StatisticsFragment;
+import checkpoint.project.andela.pushfit.fragments.CalendarFragment;
+import checkpoint.project.andela.pushfit.fragments.ExerciseFragment;
+import checkpoint.project.andela.pushfit.fragments.SettingsFragment;
+import checkpoint.project.andela.pushfit.fragments.StatisticsFragment;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

@@ -1,16 +1,15 @@
-package com.example.andela.fitgoup.notification;
+package checkpoint.project.andela.pushfit.notification;
 
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.activities.HomeDrawer;
+import checkpoint.project.andela.pushfit.activities.HomeDrawer;
 
 
 /**
@@ -33,7 +32,7 @@ public class UserAlarmService extends IntentService {
 
     PendingIntent contentIntent = PendingIntent.getActivity(this,
             0, intent1,
-            PendingIntent.FLAG_CANCEL_CURRENT);
+            PendingIntent.FLAG_UPDATE_CURRENT);
     nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
     Notification notification = new NotificationCompat.Builder(this)

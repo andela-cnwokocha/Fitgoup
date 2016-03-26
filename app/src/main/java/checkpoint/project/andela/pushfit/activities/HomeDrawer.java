@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup.activities;
+package checkpoint.project.andela.pushfit.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,15 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.fragments.CalendarFragment;
-import com.example.andela.fitgoup.fragments.ExerciseFragment;
-import com.example.andela.fitgoup.fragments.StatisticsFragment;
+import checkpoint.project.andela.pushfit.fragments.CalendarFragment;
+import checkpoint.project.andela.pushfit.fragments.ExerciseFragment;
+import checkpoint.project.andela.pushfit.fragments.StatisticsFragment;
 
 public class HomeDrawer extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {

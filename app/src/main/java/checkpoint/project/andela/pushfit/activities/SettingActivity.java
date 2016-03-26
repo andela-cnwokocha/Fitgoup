@@ -1,7 +1,6 @@
-package com.example.andela.fitgoup.activities;
+package checkpoint.project.andela.pushfit.activities;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.fragments.SettingsFragment;
+import checkpoint.project.andela.pushfit.fragments.SettingsFragment;
 
 public class SettingActivity extends AppCompatActivity {
 

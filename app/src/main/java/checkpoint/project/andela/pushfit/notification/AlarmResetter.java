@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup.notification;
+package checkpoint.project.andela.pushfit.notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

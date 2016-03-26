@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup.utils;
+package checkpoint.project.andela.pushfit.utils;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup.fragments;
+package checkpoint.project.andela.pushfit.fragments;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,22 +14,16 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.model.PushUpModel;
-import com.example.andela.fitgoup.notification.AlarmBroadcast;
+import checkpoint.project.andela.pushfit.model.PushUpModel;
+import checkpoint.project.andela.pushfit.notification.AlarmBroadcast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -44,9 +38,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   private TextView timerview;
   private TextView startbutton;
   private CountDownTimer countDownTimer;
-  private LinearLayout recordLayout;
   private TextView pushups;
-  private Button saveButton;
   private long timerCount;
   private boolean timeroption;
   private long countDownCount;
@@ -57,7 +49,6 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   private Sensor mSensor;
   private PendingIntent pendingIntent;
   private AlarmManager alarmManager;
-  private TextToSpeech textToSpeech;
 
   public ExerciseFragment() {
   }

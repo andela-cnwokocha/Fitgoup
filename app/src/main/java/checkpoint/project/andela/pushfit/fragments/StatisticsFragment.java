@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup.fragments;
+package checkpoint.project.andela.pushfit.fragments;
 
 
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.model.PushUpModel;
+import checkpoint.project.andela.pushfit.model.PushUpModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;

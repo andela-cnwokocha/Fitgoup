@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup.activities;
+package checkpoint.project.andela.pushfit.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.utils.FragmentSlide;
+import checkpoint.project.andela.pushfit.utils.FragmentSlide;
 import com.github.paolorotolo.appintro.AppIntro;
 
 public class AppIntroActivity extends AppIntro {

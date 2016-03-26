@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup.fragments;
+package checkpoint.project.andela.pushfit.fragments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
 
 import com.example.andela.fitgoup.R;
-import com.example.andela.fitgoup.utils.TimePickerDialogFragmentCompat;
-import com.example.andela.fitgoup.utils.TimePreferencePicker;
+import checkpoint.project.andela.pushfit.utils.TimePickerDialogFragmentCompat;
+import checkpoint.project.andela.pushfit.utils.TimePreferencePicker;
 
 import me.philio.preferencecompatextended.PreferenceFragmentCompat;
 
