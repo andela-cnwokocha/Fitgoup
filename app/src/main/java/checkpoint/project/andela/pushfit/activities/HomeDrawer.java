@@ -15,7 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.andela.fitgoup.R;
+import checkpoint.project.andela.pushfit.R;
 import checkpoint.project.andela.pushfit.fragments.CalendarFragment;
 import checkpoint.project.andela.pushfit.fragments.ExerciseFragment;
 import checkpoint.project.andela.pushfit.fragments.StatisticsFragment;

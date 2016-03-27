@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.andela.fitgoup.R;
+import checkpoint.project.andela.pushfit.R;
 import checkpoint.project.andela.pushfit.model.PushUpModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;

@@ -1,4 +1,4 @@
-package com.example.andela.fitgoup;
+package checkpoint.project.andela.pushfit;
 
 import android.support.test.rule.ActivityTestRule;
 
@@ -15,7 +15,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 public class HomeDashboardTest {
 
-  @Rule
+  /*@Rule
   public ActivityTestRule<HomeDashboard> trashList = new ActivityTestRule<>(HomeDashboard.class);
 
   @Test
@@ -48,5 +48,5 @@ public class HomeDashboardTest {
         .check(matches(isDisplayed()));
     onView(withText("Statistics"))
         .perform(click());
-  }
+  }*/
 }

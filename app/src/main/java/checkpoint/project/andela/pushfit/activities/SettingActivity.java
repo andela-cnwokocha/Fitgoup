@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.andela.fitgoup.R;
+import checkpoint.project.andela.pushfit.R;
 import checkpoint.project.andela.pushfit.fragments.SettingsFragment;
 
 public class SettingActivity extends AppCompatActivity {

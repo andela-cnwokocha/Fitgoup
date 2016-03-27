@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.andela.fitgoup.R;
+import checkpoint.project.andela.pushfit.R;
 import checkpoint.project.andela.pushfit.model.PushUpModel;
 import checkpoint.project.andela.pushfit.notification.AlarmBroadcast;
 

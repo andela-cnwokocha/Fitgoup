@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
-import com.example.andela.fitgoup.R;
+import checkpoint.project.andela.pushfit.R;
 import checkpoint.project.andela.pushfit.activities.HomeDrawer;
 
 

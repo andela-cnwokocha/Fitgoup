@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.andela.fitgoup.R;
+import checkpoint.project.andela.pushfit.R;
 import checkpoint.project.andela.pushfit.utils.FragmentSlide;
 import com.github.paolorotolo.appintro.AppIntro;
 

@@ -7,7 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
 
-import com.example.andela.fitgoup.R;
+import checkpoint.project.andela.pushfit.R;
 import checkpoint.project.andela.pushfit.utils.TimePickerDialogFragmentCompat;
 import checkpoint.project.andela.pushfit.utils.TimePreferencePicker;
 
