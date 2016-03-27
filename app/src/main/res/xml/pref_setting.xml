@@ -57,7 +57,7 @@
             app:minValue="1"
             app:valueAsSummary="false"/>
 
-        <com.example.andela.fitgoup.utils.TimePreferencePicker
+        <checkpoint.project.andela.pushfit.utils.TimePreferencePicker
             android:key="pushup_hour"
             android:title="HH:MM"
             android:defaultValue="12:00"

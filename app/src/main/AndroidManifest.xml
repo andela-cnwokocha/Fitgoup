@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.example.andela.fitgoup"
+<manifest package="checkpoint.project.andela.pushfit"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Pushfit"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -16,31 +16,23 @@
             android:name="AA_DB_VERSION"
             android:value="4"/>
 
-        <activity
-            android:name=".activities.HomeDashboard"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_home_dashboard"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <receiver android:name=".notification.AlarmResetter">
+        <receiver android:name="checkpoint.project.andela.pushfit.notification.AlarmResetter">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".notification.AlarmBroadcast"
+            android:name="checkpoint.project.andela.pushfit.notification.AlarmBroadcast"
             android:process=":remote"/>
 
         <service
-            android:name=".notification.UserAlarmService"
+            android:name="checkpoint.project.andela.pushfit.notification.UserAlarmService"
             android:exported="false"/>
 
-        <activity android:name=".activities.AppIntroActivity">
+        <activity android:name="checkpoint.project.andela.pushfit.activities.AppIntroActivity">
         </activity>
         <activity
-            android:name=".activities.HomeDrawer"
+            android:name="checkpoint.project.andela.pushfit.activities.HomeDrawer"
             android:label="@string/title_activity_home_drawer"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -49,7 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SettingActivity">
+        <activity android:name="checkpoint.project.andela.pushfit.activities.SettingActivity">
         </activity>
     </application>
 

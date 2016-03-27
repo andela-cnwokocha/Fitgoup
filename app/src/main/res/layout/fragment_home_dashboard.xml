@@ -8,7 +8,7 @@
     android:animateLayoutChanges="true"
     android:id="@+id/exercise_fragment"
     android:padding="@dimen/bootstrap_h1_vert_padding"
-    tools:context="com.example.andela.fitgoup.activities.HomeDrawer$PlaceholderFragment">
+    tools:context="checkpoint.project.andela.pushfit.activities.HomeDrawer$PlaceholderFragment">
 
     <TextView
         android:layout_width="wrap_content"
