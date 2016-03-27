@@ -9,32 +9,31 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:paddingLeft="32dp"
+        android:paddingLeft="10dp"
         android:layout_weight="1"
         android:fontFamily="sans-serif-thin"
         android:textColor="@color/colorPrimaryText"
-        android:paddingRight="32dp"
+        android:paddingRight="10dp"
         android:textSize="28sp"
         android:text="How To Use"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_weight="4"
         android:textColor="@color/colorPrimaryText"
-        android:paddingLeft="64dp"
-        android:paddingRight="64dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:textSize="16sp"
         android:text="@string/appintro_slide2_howtouse"/>
 
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="20dp"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

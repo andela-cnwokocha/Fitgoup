@@ -16,16 +16,16 @@
     <string name="stop_timer">Stop</string>
     <string name="no_data">No data available</string>
     <string name="pushfit_slide1_description">PushFit is an application that helps you count the
-    number of push ups you\'ve done in a day. With PushFit, you can customize how frequently you want to
+    number of push ups you\'ve done in a day. with PushFit, you can customize how frequently you
+        want to
     workout.</string>
-    <string name="appintro_slide2_howtouse">"Its easy! You only have to click the start button to start doing
-        Push ups. There are two options for counting your push ups.
-
-        With the <b>Countdown Timer</b> option selected, when the time you specified ends,
-        you\'ll be prompted to enter the number of push ups you recorded. This value is saved so you can view later on.
-        For <b>Sensor Counter</b>, you set the minimum number of push ups you can do, when you click the start button,
-        you place your device just beneath your head, your push ups is counted and
-        saved when you reach the specified amount of pushups.
+    <string name="appintro_slide2_howtouse">"Place your device just under your head and click the
+     start button to start recording your push ups. There are two options;
+        With the <b>Countdown Timer</b> option selected, when the time you specified ends, the
+        number of push ups you recorded will be saved automatically.
+        For <b>Sensor Counter</b>, you set the minimum number of push ups you can do,
+        when you reach the specified amount of push ups, you\'ll be notified and the push ups
+        recorded.
         "</string>
     <string name="skip_tutorial">You\'ve skipped the tutorial</string>
     <string name="title_activity_home_drawer">PushFit</string>
