@@ -84,9 +84,13 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   }
 
   private void ringStopAlarm() {
-    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-    Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
-    doneSound.play();
+    try {
+      Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+      Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+      doneSound.play();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -97,6 +101,8 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
   public void onViewCreated(View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     getActivity().setTitle("PushFit");
+
+
     startbutton = (TextView) view.findViewById(R.id.fragment_exercise);
     timerview = (TextView) view.findViewById(R.id.timer_field);
     pushups = (TextView) view.findViewById(R.id.time_state);
@@ -241,13 +247,7 @@ public class ExerciseFragment extends Fragment implements SensorEventListener {
         if(!pushups.getText().toString().trim().equals("")) {
           savePushups(processedpushup());
         }
-        try {
-          Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-          Ringtone doneSound = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
-          doneSound.play();
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+        ringStopAlarm();
       }
     };
   }
