@@ -16,12 +16,10 @@ The following functions are implemented:
 
 ## Screenshots
 
-![Complete](https://github.com/andela-cnwokocha/Fitgoup/blob/master/assets/Screenshot_2016-03-23-09-27-10-134.png "Optional Title")
-![Exercise Days](https://github.com/andela-cnwokocha/Fitgoup/blob/master/assets/Screenshot_2016-03-23-09-27-49-252.png "Optional Title")
-![Chart](https://github.com/andela-cnwokocha/Fitgoup/blob/master/assets/Screenshot_2016-03-23-09-28-19-006.png "Optional Title")
-![Settings](https://github.com/andela-cnwokocha/Fitgoup/blob/master/assets/Screenshot_2016-03-23-09-28-48-086.png "Optional Title")
-![Timer counter](https://github.com/andela-cnwokocha/Fitgoup/blob/master/assets/Screenshot_2016-03-23-09-30-46-773.png "Optional Title")
-![Count Saved](https://github.com/andela-cnwokocha/Fitgoup/blob/master/assets/Screenshot_2016-03-23-09-38-21-282.png "Optional Title")
+![Complete](https://github.com/andela-cnwokocha/PushFit/blob/master/assets/timerunnung.png "Optional Title")
+![Chart](https://github.com/andela-cnwokocha/PushFit/blob/master/assets/chart.png "Optional Title")
+![Settings](https://github.com/andela-cnwokocha/PushFit/blob/master/assets/settings.png "Optional Title")
+![Timer counter](https://github.com/andela-cnwokocha/PushFit/blob/master/assets/calendar.png "Optional Title")
 
 
 ##### Contributions
