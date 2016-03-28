@@ -30,9 +30,6 @@
         <service
             android:name="checkpoint.project.andela.pushfit.notification.UserAlarmService"
             android:exported="false"/>
-
-        <activity android:name="checkpoint.project.andela.pushfit.activities.AppIntroActivity">
-        </activity>
         <activity
             android:name="checkpoint.project.andela.pushfit.activities.HomeDrawer"
             android:label="@string/title_activity_home_drawer"
@@ -42,6 +39,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name="checkpoint.project.andela.pushfit.activities.AppIntroActivity">
         </activity>
         <activity android:name="checkpoint.project.andela.pushfit.activities.SettingActivity">
         </activity>

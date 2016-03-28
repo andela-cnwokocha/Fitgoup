@@ -1,18 +1,17 @@
 package checkpoint.project.andela.pushfit;
 
+import android.content.Intent;
 import android.os.Build;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 import android.widget.TextView;
 
-import checkpoint.project.andela.pushfit.BuildConfig;
-import checkpoint.project.andela.pushfit.R;
 
+import checkpoint.project.andela.pushfit.activities.HomeDrawer;
+import checkpoint.project.andela.pushfit.activities.SettingActivity;
 import checkpoint.project.andela.pushfit.fragments.CalendarFragment;
 import checkpoint.project.andela.pushfit.fragments.ExerciseFragment;
-import checkpoint.project.andela.pushfit.fragments.SettingsFragment;
 import checkpoint.project.andela.pushfit.fragments.StatisticsFragment;
 
 import org.hamcrest.CoreMatchers;
@@ -23,6 +22,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.fakes.RoboMenuItem;
+import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.Shadows;;
 import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import static junit.framework.Assert.assertNotNull;
@@ -36,33 +38,19 @@ import static junit.framework.Assert.assertTrue;
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
 public class StartScreenTest {
-  /*private HomeDashboard homeDashboard;
-  private ViewPager viewPager;
-  private TabLayout tabLayout;
-  private CalendarFragment calendarFragment;
-  private SettingsFragment settingsFragment;
-  private StatisticsFragment statisticsFragment;
-  private ExerciseFragment exerciseFragment;
+  private HomeDrawer homeDashboard;
+  private ShadowActivity homwdashboardShadow;
+
 
   @Before
   public void setUp() {
-    homeDashboard = Robolectric.setupActivity(HomeDashboard.class);
-    viewPager = (ViewPager) homeDashboard.getWindow().findViewById(R.id.container);
-    tabLayout = (TabLayout) homeDashboard.getWindow().findViewById(R.id.tabs);
+    homeDashboard = Robolectric.setupActivity(HomeDrawer.class);
+    homwdashboardShadow = Shadows.shadowOf(homeDashboard);
   }
 
   @Test
   public void validateTitle() {
     assertTrue(homeDashboard.getTitle().toString().equals("PushFit"));
-  }
-
-  @Test
-  public void testPagerProperties() {
-    assertNotNull(viewPager);
-    assertNotNull(tabLayout);
-
-    assertTrue(tabLayout.getTabCount() == 4);
-
   }
 
   @Test
@@ -76,14 +64,12 @@ public class StartScreenTest {
     Assert.assertThat(exerciseFragment.getView(), CoreMatchers.not(CoreMatchers.nullValue()));
     Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.not(CoreMatchers.nullValue()));
     Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(FragmentActivity.class));
-    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(HomeDashboard.class));
+    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(HomeDrawer.class));
 
     TextView timerview = (TextView) homeDashboard.findViewById(R.id.timer_field);
     assertTrue(timerview.getText().equals("00:05:00"));
     TextView buttonText = (TextView) homeDashboard.findViewById(R.id.fragment_exercise);
     assertTrue(buttonText.getText().equals("Start"));
-
-    assertTrue(tabLayout.getTabAt(0).getText().equals("Exercise"));
   }
 
   @Test
@@ -91,23 +77,6 @@ public class StartScreenTest {
     CalendarFragment calendarFragment = new CalendarFragment();
     SupportFragmentTestUtil.startFragment(calendarFragment);
     assertNotNull(calendarFragment);
-
-  }
-
-  @Test
-  public void settingsFragmentTest() {
-    SettingsFragment settingsFragment = new SettingsFragment();
-    FragmentManager fragmentManager = homeDashboard.getSupportFragmentManager();
-    fragmentManager.beginTransaction().add(settingsFragment, "Settings").commit();
-    homeDashboard.getSupportFragmentManager().executePendingTransactions();
-
-    Assert.assertThat(settingsFragment, CoreMatchers.not(CoreMatchers.nullValue()));
-    Assert.assertThat(settingsFragment.getView(), CoreMatchers.not(CoreMatchers.nullValue()));
-    Assert.assertThat(settingsFragment.getActivity(), CoreMatchers.not(CoreMatchers.nullValue()));
-    Assert.assertThat(settingsFragment.getActivity(), CoreMatchers.instanceOf(FragmentActivity.class));
-    Assert.assertThat(settingsFragment.getActivity(), CoreMatchers.instanceOf(HomeDashboard.class));
-
-    assertTrue(tabLayout.getTabAt(3).getText().equals("Settings"));
   }
 
   @Test
@@ -115,6 +84,17 @@ public class StartScreenTest {
     StatisticsFragment statisticsFragment = new StatisticsFragment();
     SupportFragmentTestUtil.startFragment(statisticsFragment);
     assertNotNull(statisticsFragment);
-  }*/
+  }
+
+  @Test
+  public void testOptionsMenuActions() {
+    MenuItem menuItem = new RoboMenuItem(R.id.action_settings);
+    assertNotNull(menuItem);
+    homeDashboard.onOptionsItemSelected(menuItem);
+   /* ShadowActivity.IntentForResult expectedIntent = new ShadowActivity.IntentForResult(homeDashboard, SettingActivity
+        .class);*/
+    //assertTrue(homwdashboardShadow.getNextStartedActivityForResult().equals(expectedIntent));
+  }
+
 
 }
