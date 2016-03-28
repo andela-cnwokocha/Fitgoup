@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="checkpoint.project.andela.pushfit"
           xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.activeandroid.app.Application"
@@ -28,9 +30,6 @@
         <service
             android:name="checkpoint.project.andela.pushfit.notification.UserAlarmService"
             android:exported="false"/>
-
-        <activity android:name="checkpoint.project.andela.pushfit.activities.AppIntroActivity">
-        </activity>
         <activity
             android:name="checkpoint.project.andela.pushfit.activities.HomeDrawer"
             android:label="@string/title_activity_home_drawer"
@@ -40,6 +39,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity android:name="checkpoint.project.andela.pushfit.activities.AppIntroActivity">
         </activity>
         <activity android:name="checkpoint.project.andela.pushfit.activities.SettingActivity">
         </activity>

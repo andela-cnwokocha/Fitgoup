@@ -17,7 +17,7 @@
         android:id="@+id/timer_field"
         android:textSize="40sp"
         android:layout_weight="1.5"
-        android:paddingTop="15dp"
+        android:paddingTop="25dp"
         android:paddingBottom="50dp"
         android:layout_gravity="center_vertical|center_horizontal"/>
 
@@ -54,22 +54,6 @@
             android:id="@+id/time_state"
             android:text=""
             android:textSize="50sp"/>
-
-        <!--<EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:inputType="number"
-            android:id="@+id/pushup_num"
-            android:hint="Push ups"/>-->
-        <!--<Button
-            android:layout_width="wrap_content"
-            android:background="@drawable/save_record_button"
-            android:clickable="true"
-            android:id="@+id/save_button"
-            android:textColor="@color/icons"
-            android:layout_height="wrap_content"
-            android:text="Save Record"/>-->
     </LinearLayout>
 
 </LinearLayout>

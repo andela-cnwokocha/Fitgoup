@@ -29,6 +29,8 @@ You are welcome to contribute to this application
 
 They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle):
 
+Find on [Google play store](https://play.google.com/store/apps/details?id=checkpoint.project
+.andela.pushfit&hl=en):
 
 ##License
 
