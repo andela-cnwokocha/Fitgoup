@@ -30,7 +30,7 @@ You are welcome to contribute to this application
 They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle):
 
 ####Download
-Find on Google play [![Get it on Google Play](http://i.imgur.com/7sq06lr.png)](hhttps://play.google.com/store/apps/details?id=checkpoint.project.andela.pushfit)
+[![Get it on Google Play](http://i.imgur.com/7sq06lr.png)](https://play.google.com/store/apps/details?id=checkpoint.project.andela.pushfit):
 
 
 ##License
