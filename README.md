@@ -29,8 +29,9 @@ You are welcome to contribute to this application
 
 They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle):
 
-Find on [Google play store](https://play.google.com/store/apps/details?id=checkpoint.project
-.andela.pushfit&hl=en):
+####Download
+Find on Google play [![Get it on Google Play](http://i.imgur.com/7sq06lr.png)](hhttps://play.google.com/store/apps/details?id=checkpoint.project.andela.pushfit)
+
 
 ##License
 
@@ -48,6 +49,3 @@ Find on [Google play store](https://play.google.com/store/apps/details?id=checkp
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-
