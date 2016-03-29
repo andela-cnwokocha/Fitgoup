@@ -27,10 +27,11 @@ You are welcome to contribute to this application
 
 ####Dependences
 
-They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle):
+They're all listed in the [build.gradle](https://github.com/andela-cnwokocha/Fitgoup/blob/master/app/build.gradle)
 
 ####Download
-[![Get it on Google Play](http://i.imgur.com/7sq06lr.png)](https://play.google.com/store/apps/details?id=checkpoint.project.andela.pushfit):
+Find on play store
+[![Get it on Google Play](http://i.imgur.com/7sq06lr.png)](https://play.google.com/store/apps/details?id=checkpoint.project.andela.pushfit)
 
 
 ##License
