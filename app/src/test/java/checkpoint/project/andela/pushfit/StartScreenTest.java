@@ -1,15 +1,15 @@
 package checkpoint.project.andela.pushfit;
 
-import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 
 import checkpoint.project.andela.pushfit.activities.HomeDrawer;
-import checkpoint.project.andela.pushfit.activities.SettingActivity;
 import checkpoint.project.andela.pushfit.fragments.CalendarFragment;
 import checkpoint.project.andela.pushfit.fragments.ExerciseFragment;
 import checkpoint.project.andela.pushfit.fragments.StatisticsFragment;
@@ -39,13 +39,15 @@ import static junit.framework.Assert.assertTrue;
 @RunWith(RobolectricGradleTestRunner.class)
 public class StartScreenTest {
   private HomeDrawer homeDashboard;
-  private ShadowActivity homwdashboardShadow;
+  private ShadowActivity homedashboardShadow;
+  private DrawerLayout drawerLayout;
 
 
   @Before
   public void setUp() {
     homeDashboard = Robolectric.setupActivity(HomeDrawer.class);
-    homwdashboardShadow = Shadows.shadowOf(homeDashboard);
+    homedashboardShadow = Shadows.shadowOf(homeDashboard);
+    drawerLayout = (DrawerLayout) homeDashboard.findViewById(R.id.drawer_layout);
   }
 
   @Test
@@ -60,11 +62,7 @@ public class StartScreenTest {
     fragmentManager.beginTransaction().add(exerciseFragment, "EXERCISE").commit();
     homeDashboard.getSupportFragmentManager().executePendingTransactions();
 
-    Assert.assertThat(exerciseFragment, CoreMatchers.not(CoreMatchers.nullValue()));
-    Assert.assertThat(exerciseFragment.getView(), CoreMatchers.not(CoreMatchers.nullValue()));
-    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.not(CoreMatchers.nullValue()));
-    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(FragmentActivity.class));
-    Assert.assertThat(exerciseFragment.getActivity(), CoreMatchers.instanceOf(HomeDrawer.class));
+    testFragment(exerciseFragment);
 
     TextView timerview = (TextView) homeDashboard.findViewById(R.id.timer_field);
     assertTrue(timerview.getText().equals("00:05:00"));
@@ -90,11 +88,24 @@ public class StartScreenTest {
   public void testOptionsMenuActions() {
     MenuItem menuItem = new RoboMenuItem(R.id.action_settings);
     assertNotNull(menuItem);
-    homeDashboard.onOptionsItemSelected(menuItem);
-   /* ShadowActivity.IntentForResult expectedIntent = new ShadowActivity.IntentForResult(homeDashboard, SettingActivity
-        .class);*/
-    //assertTrue(homwdashboardShadow.getNextStartedActivityForResult().equals(expectedIntent));
   }
 
+  @Test
+  public void testSelectNavItemToChangeFragment() {
+    assertNotNull(drawerLayout);
+    MenuItem menuItem = new RoboMenuItem(R.id.stats);
+    assertNotNull(menuItem);
+
+    homeDashboard.onNavigationItemSelected(menuItem);
+    assertTrue(homeDashboard.getTitle().toString().equals("Reports"));
+  }
+
+  private void testFragment(Fragment fragment) {
+    Assert.assertThat(fragment, CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(fragment.getView(), CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(fragment.getActivity(), CoreMatchers.not(CoreMatchers.nullValue()));
+    Assert.assertThat(fragment.getActivity(), CoreMatchers.instanceOf(FragmentActivity.class));
+    Assert.assertThat(fragment.getActivity(), CoreMatchers.instanceOf(HomeDrawer.class));
+  }
 
 }
